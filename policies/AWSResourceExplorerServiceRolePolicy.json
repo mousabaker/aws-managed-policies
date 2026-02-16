@@ -780,6 +780,7 @@
           "iam:ListAttachedRolePolicies",
           "iam:ListRolePolicies",
           "kinesis:DescribeStreamSummary",
+          "kinesis:ListTagsForResource",
           "kinesis:ListTagsForStream",
           "lambda:GetEventSourceMapping",
           "lambda:GetFunction",
@@ -824,7 +825,7 @@
       }
     ]
   },
-  "VersionId": "v22",
+  "VersionId": "v49",
   "IsDefaultVersion": true,
-  "CreateDate": "2025-12-16T20:19:10+00:00"
+  "CreateDate": "2026-02-12T17:58:48+00:00"
 }

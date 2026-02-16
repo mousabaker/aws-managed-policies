@@ -146,10 +146,22 @@
             ]
           }
         }
+      },
+      {
+        "Sid": "AmazonQPartnerAssistantAccess",
+        "Effect": "Allow",
+        "Action": [
+          "q:StartConversation",
+          "q:SendMessage",
+          "q:GetConversation",
+          "q:ListConversations",
+          "q:PassRequest"
+        ],
+        "Resource": "*"
       }
     ]
   },
-  "VersionId": "v3",
+  "VersionId": "v8",
   "IsDefaultVersion": true,
-  "CreateDate": "2025-12-01T00:49:06+00:00"
+  "CreateDate": "2026-02-14T00:57:09+00:00"
 }

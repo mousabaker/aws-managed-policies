@@ -86,10 +86,22 @@
         "Resource": [
           "arn:aws:partnercentral::*:catalog/AWS/ReportingData/MarketingCampaign_V1/Dashboard/*"
         ]
+      },
+      {
+        "Sid": "AmazonQPartnerAssistantAccess",
+        "Effect": "Allow",
+        "Action": [
+          "q:StartConversation",
+          "q:SendMessage",
+          "q:GetConversation",
+          "q:ListConversations",
+          "q:PassRequest"
+        ],
+        "Resource": "*"
       }
     ]
   },
-  "VersionId": "v1",
+  "VersionId": "v4",
   "IsDefaultVersion": true,
-  "CreateDate": "2025-12-01T00:34:10+00:00"
+  "CreateDate": "2026-02-14T00:57:08+00:00"
 }
