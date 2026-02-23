@@ -118,10 +118,22 @@
             "partnercentral-account-management:LegacyPartnerCentralRole": "TechnicalStaff"
           }
         }
+      },
+      {
+        "Sid": "AmazonQPartnerAssistantAccess",
+        "Effect": "Allow",
+        "Action": [
+          "q:StartConversation",
+          "q:SendMessage",
+          "q:GetConversation",
+          "q:ListConversations",
+          "q:PassRequest"
+        ],
+        "Resource": "*"
       }
     ]
   },
-  "VersionId": "v14",
+  "VersionId": "v15",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:01:40+00:00"
+  "CreateDate": "2026-02-19T19:12:10+00:00"
 }

@@ -7,7 +7,6 @@
         "Action": [
           "account:GetAccountInformation",
           "account:GetAlternateContact",
-          "account:GetChallengeQuestions",
           "account:GetContactInformation",
           "account:GetRegionOptStatus",
           "account:ListRegions",
@@ -26,7 +25,7 @@
       }
     ]
   },
-  "VersionId": "v2",
+  "VersionId": "v3",
   "IsDefaultVersion": true,
-  "CreateDate": "2023-03-07T17:02:30+00:00"
+  "CreateDate": "2026-02-20T20:57:12+00:00"
 }

@@ -1,0 +1,49 @@
+{
+  "Document": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "LogsAPIs",
+        "Effect": "Allow",
+        "Action": [
+          "logs:CallWithBearerToken",
+          "logs:PutLogEvents"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Sid": "KMSAPIs",
+        "Effect": "Allow",
+        "Action": [
+          "kms:GenerateDataKey",
+          "kms:Decrypt"
+        ],
+        "Condition": {
+          "StringLike": {
+            "kms:ViaService": "logs.*.amazonaws.com"
+          },
+          "ArnLike": {
+            "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:*:*:log-group:*"
+          }
+        },
+        "Resource": "arn:aws:kms:*:*:key/*"
+      },
+      {
+        "Sid": "KMSDescribeAPIs",
+        "Effect": "Allow",
+        "Action": [
+          "kms:DescribeKey"
+        ],
+        "Condition": {
+          "StringLike": {
+            "kms:ViaService": "logs.*.amazonaws.com"
+          }
+        },
+        "Resource": "arn:aws:kms:*:*:key/*"
+      }
+    ]
+  },
+  "VersionId": "v1",
+  "IsDefaultVersion": true,
+  "CreateDate": "2026-02-20T19:42:07+00:00"
+}
