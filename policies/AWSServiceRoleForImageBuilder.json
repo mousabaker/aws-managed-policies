@@ -229,11 +229,6 @@
       },
       {
         "Effect": "Allow",
-        "Action": "ssm:StartAutomationExecution",
-        "Resource": "arn:aws:ssm:*:*:automation-definition/ImageBuilder*"
-      },
-      {
-        "Effect": "Allow",
         "Action": [
           "ssm:CreateAssociation",
           "ssm:DeleteAssociation"
@@ -453,7 +448,7 @@
       }
     ]
   },
-  "VersionId": "v25",
+  "VersionId": "v26",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:58:14+00:00"
+  "CreateDate": "2026-02-23T22:27:06+00:00"
 }

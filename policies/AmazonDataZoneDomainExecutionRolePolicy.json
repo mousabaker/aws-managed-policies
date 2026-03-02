@@ -112,6 +112,7 @@
           "datazone:ListSubscriptions",
           "datazone:ListTimeSeriesDataPoints",
           "datazone:ListWarehouseMetadata",
+          "datazone:QueryGraph",
           "datazone:RejectPredictions",
           "datazone:RejectSubscriptionRequest",
           "datazone:RemoveEntityOwner",
@@ -149,7 +150,7 @@
       }
     ]
   },
-  "VersionId": "v12",
+  "VersionId": "v13",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:59:33+00:00"
+  "CreateDate": "2026-02-26T00:12:11+00:00"
 }

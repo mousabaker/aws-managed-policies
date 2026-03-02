@@ -105,7 +105,8 @@
         "Resource": [
           "arn:aws:ec2:*:*:subnet/*",
           "arn:aws:ec2:*:*:security-group/*",
-          "arn:aws:ec2:*::image/*"
+          "arn:aws:ec2:*::image/*",
+          "arn:aws:resource-groups:*:*:group/*"
         ]
       },
       {
@@ -141,8 +142,8 @@
           "arn:aws:iam::*:role/ecsInstanceRole*"
         ],
         "Condition": {
-          "StringEquals": {
-            "iam:PassedToService": "ec2.amazonaws.com"
+          "StringLike": {
+            "iam:PassedToService": "ec2.*"
           }
         }
       },
@@ -168,13 +169,25 @@
           "ec2:DescribeAvailabilityZones",
           "ec2:DescribeSecurityGroups",
           "ec2:DescribeSubnets",
-          "ec2:DescribeVpcs"
+          "ec2:DescribeVpcs",
+          "ec2:DescribeCapacityReservations"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Sid": "ListResourceGroupResources",
+        "Effect": "Allow",
+        "Action": [
+          "resource-groups:ListGroupResources",
+          "cloudformation:DescribeStacks",
+          "cloudformation:ListStackResources",
+          "tag:GetResources"
         ],
         "Resource": "*"
       }
     ]
   },
-  "VersionId": "v9",
+  "VersionId": "v11",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:59:11+00:00"
+  "CreateDate": "2026-02-26T18:27:10+00:00"
 }

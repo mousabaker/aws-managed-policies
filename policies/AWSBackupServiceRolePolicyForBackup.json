@@ -615,10 +615,30 @@
             "eks:accessScope": "cluster"
           }
         }
+      },
+      {
+        "Sid": "GuardDutyMalwareScanPermissions",
+        "Effect": "Allow",
+        "Action": [
+          "guardduty:StartMalwareScan",
+          "guardduty:GetMalwareScan"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Sid": "GuardDutyMalwareScanIAMPassPermissions",
+        "Effect": "Allow",
+        "Action": "iam:PassRole",
+        "Resource": "arn:aws:iam::*:role/*",
+        "Condition": {
+          "StringEquals": {
+            "iam:PassedToService": "malware-protection.guardduty.amazonaws.com"
+          }
+        }
       }
     ]
   },
-  "VersionId": "v29",
+  "VersionId": "v30",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:59:19+00:00"
+  "CreateDate": "2026-02-23T19:42:11+00:00"
 }
