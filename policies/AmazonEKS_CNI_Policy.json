@@ -15,6 +15,7 @@
           "ec2:DescribeNetworkInterfaces",
           "ec2:DescribeInstanceTypes",
           "ec2:DescribeSubnets",
+          "ec2:DescribeSecurityGroups",
           "ec2:DetachNetworkInterface",
           "ec2:ModifyNetworkInterfaceAttribute",
           "ec2:UnassignPrivateIpAddresses"
@@ -33,7 +34,7 @@
       }
     ]
   },
-  "VersionId": "v5",
+  "VersionId": "v6",
   "IsDefaultVersion": true,
-  "CreateDate": "2024-03-04T20:20:55+00:00"
+  "CreateDate": "2026-03-04T19:12:14+00:00"
 }

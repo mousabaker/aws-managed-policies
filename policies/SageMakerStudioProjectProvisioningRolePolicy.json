@@ -642,7 +642,8 @@
               "redshift-serverless.amazonaws.com",
               "redshift.amazonaws.com",
               "emr-serverless.amazonaws.com",
-              "airflow.amazonaws.com"
+              "airflow.amazonaws.com",
+              "athena.amazonaws.com"
             ]
           }
         }
@@ -2992,7 +2993,7 @@
       }
     ]
   },
-  "VersionId": "v76",
+  "VersionId": "v77",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:03:06+00:00"
+  "CreateDate": "2026-03-02T20:12:08+00:00"
 }

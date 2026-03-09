@@ -12,7 +12,8 @@
           "redshift-data:*",
           "redshift-serverless:*",
           "redshift:*",
-          "s3:*"
+          "s3:*",
+          "s3tables:*"
         ],
         "Resource": "*"
       },
@@ -673,7 +674,7 @@
       }
     ]
   },
-  "VersionId": "v15",
+  "VersionId": "v16",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:58:44+00:00"
+  "CreateDate": "2026-03-05T17:42:13+00:00"
 }

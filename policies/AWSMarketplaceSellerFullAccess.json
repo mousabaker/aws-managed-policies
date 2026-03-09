@@ -174,10 +174,19 @@
           "q:PassRequest"
         ],
         "Resource": "*"
+      },
+      {
+        "Sid": "VerificationAccess",
+        "Effect": "Allow",
+        "Action": [
+          "partnercentral:StartVerification",
+          "partnercentral:GetVerification"
+        ],
+        "Resource": "*"
       }
     ]
   },
-  "VersionId": "v24",
+  "VersionId": "v25",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-19T18:27:11+00:00"
+  "CreateDate": "2026-03-02T23:42:11+00:00"
 }

@@ -28,6 +28,7 @@
           "ArnLike": {
             "iam:AssociatedResourceARN": [
               "arn:aws:ssm:*:*:document/AWSQuickSetupType-Scheduler-ChangeCalendarState",
+              "arn:aws:ssm:*:*:automation-execution/*",
               "arn:aws:ssm:*:*:automation-definition/AWSQuickSetupType-Scheduler-ChangeCalendarState*"
             ]
           }
@@ -35,7 +36,7 @@
       }
     ]
   },
-  "VersionId": "v6",
+  "VersionId": "v7",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:02:11+00:00"
+  "CreateDate": "2026-03-05T16:57:14+00:00"
 }
