@@ -34,10 +34,37 @@
             ]
           }
         }
+      },
+      {
+        "Sid": "AIEnvironmentAnalysisInvokeFoundationModel",
+        "Effect": "Allow",
+        "Action": "bedrock:InvokeModel",
+        "Resource": "arn:aws:bedrock:*::foundation-model/anthropic.claude-*"
+      },
+      {
+        "Sid": "AIEnvironmentAnalysisInvokeInferenceProfile",
+        "Effect": "Allow",
+        "Action": "bedrock:InvokeModel",
+        "Resource": "arn:aws:bedrock:*:*:inference-profile/*anthropic.claude-*",
+        "Condition": {
+          "StringEquals": {
+            "aws:ResourceAccount": "${aws:PrincipalAccount}"
+          }
+        }
+      },
+      {
+        "Sid": "AIEnvironmentAnalysisReadOnly",
+        "Effect": "Allow",
+        "Action": [
+          "bedrock:ListFoundationModels",
+          "elasticbeanstalk:DescribeEvents",
+          "elasticbeanstalk:DescribeEnvironmentHealth"
+        ],
+        "Resource": "*"
       }
     ]
   },
-  "VersionId": "v3",
+  "VersionId": "v4",
   "IsDefaultVersion": true,
-  "CreateDate": "2023-03-23T22:04:20+00:00"
+  "CreateDate": "2026-03-12T14:12:13+00:00"
 }

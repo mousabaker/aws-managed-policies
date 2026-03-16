@@ -160,10 +160,29 @@
           "q:PassRequest"
         ],
         "Resource": "*"
+      },
+      {
+        "Sid": "PartnerCentralAgentsSessionAccess",
+        "Effect": "Allow",
+        "Action": [
+          "partnercentral:UseSession"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "partnercentral:Catalog": [
+              "AWS",
+              "Sandbox"
+            ]
+          },
+          "Bool": {
+            "aws:IsMcpServiceAction": "true"
+          }
+        }
       }
     ]
   },
-  "VersionId": "v13",
+  "VersionId": "v14",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:59:12+00:00"
+  "CreateDate": "2026-03-12T17:12:13+00:00"
 }

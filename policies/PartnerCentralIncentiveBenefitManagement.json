@@ -134,10 +134,29 @@
           "s3:PutObject"
         ],
         "Resource": "arn:aws:s3:::aws-partner-central-marketplace-ephemeral-writeonly-files/${aws:PrincipalAccount}/*"
+      },
+      {
+        "Sid": "PartnerCentralAgentsSessionAccess",
+        "Effect": "Allow",
+        "Action": [
+          "partnercentral:UseSession"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "partnercentral:Catalog": [
+              "AWS",
+              "Sandbox"
+            ]
+          },
+          "Bool": {
+            "aws:IsMcpServiceAction": "true"
+          }
+        }
       }
     ]
   },
-  "VersionId": "v3",
+  "VersionId": "v4",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:02:55+00:00"
+  "CreateDate": "2026-03-12T16:57:13+00:00"
 }

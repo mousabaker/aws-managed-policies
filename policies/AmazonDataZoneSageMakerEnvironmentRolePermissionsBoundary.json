@@ -1184,10 +1184,18 @@
           "sso:AssociateProfile"
         ],
         "Resource": "*"
+      },
+      {
+        "Sid": "DenyUpdateNotebookInstanceLifecycleConfig",
+        "Effect": "Deny",
+        "Action": [
+          "sagemaker:UpdateNotebookInstanceLifecycleConfig"
+        ],
+        "Resource": "*"
       }
     ]
   },
-  "VersionId": "v10",
+  "VersionId": "v11",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:02:52+00:00"
+  "CreateDate": "2026-03-11T21:12:10+00:00"
 }

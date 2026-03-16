@@ -16,6 +16,22 @@
         }
       },
       {
+        "Sid": "PartnerCentralAgentsSandboxSessionAccess",
+        "Effect": "Allow",
+        "Action": [
+          "partnercentral:UseSession"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "partnercentral:Catalog": "Sandbox"
+          },
+          "Bool": {
+            "aws:IsMcpServiceAction": "true"
+          }
+        }
+      },
+      {
         "Sid": "PassAWSPartnerCentralSnapshotJobRole",
         "Effect": "Allow",
         "Action": [
@@ -32,7 +48,7 @@
       }
     ]
   },
-  "VersionId": "v4",
+  "VersionId": "v5",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:59:18+00:00"
+  "CreateDate": "2026-03-12T17:12:12+00:00"
 }

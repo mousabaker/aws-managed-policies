@@ -84,10 +84,37 @@
           "arn:aws:elasticbeanstalk:*:*:application/*",
           "arn:aws:elasticbeanstalk:*:*:environment/*"
         ]
+      },
+      {
+        "Sid": "AIEnvironmentAnalysisInvokeFoundationModel",
+        "Effect": "Allow",
+        "Action": "bedrock:InvokeModel",
+        "Resource": "arn:aws:bedrock:*::foundation-model/anthropic.claude-*"
+      },
+      {
+        "Sid": "AIEnvironmentAnalysisInvokeInferenceProfile",
+        "Effect": "Allow",
+        "Action": "bedrock:InvokeModel",
+        "Resource": "arn:aws:bedrock:*:*:inference-profile/*anthropic.claude-*",
+        "Condition": {
+          "StringEquals": {
+            "aws:ResourceAccount": "${aws:PrincipalAccount}"
+          }
+        }
+      },
+      {
+        "Sid": "AIEnvironmentAnalysisReadOnly",
+        "Effect": "Allow",
+        "Action": [
+          "bedrock:ListFoundationModels",
+          "elasticbeanstalk:DescribeEvents",
+          "elasticbeanstalk:DescribeEnvironmentHealth"
+        ],
+        "Resource": "*"
       }
     ]
   },
-  "VersionId": "v6",
+  "VersionId": "v7",
   "IsDefaultVersion": true,
-  "CreateDate": "2020-09-09T19:53:40+00:00"
+  "CreateDate": "2026-03-12T14:27:08+00:00"
 }

@@ -925,13 +925,21 @@
         "Effect": "Allow",
         "Action": [
           "emr-serverless:ListApplications",
-          "emr-serverless:GetApplication"
+          "emr-serverless:GetApplication",
+          "emr-serverless:GetDashboardForJobRun",
+          "emr-serverless:GetJobRun",
+          "emr-serverless:ListJobRunAttempts",
+          "emr-serverless:ListJobRuns",
+          "emr-serverless:ListTagsForResource",
+          "emr-serverless:StartApplication",
+          "emr-serverless:StartJobRun",
+          "emr-serverless:AccessLivyEndpoints"
         ],
         "Resource": "*"
       }
     ]
   },
-  "VersionId": "v21",
+  "VersionId": "v22",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:02:28+00:00"
+  "CreateDate": "2026-03-11T17:42:09+00:00"
 }
