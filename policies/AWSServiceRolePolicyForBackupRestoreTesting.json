@@ -63,6 +63,7 @@
           "elasticfilesystem:DeleteMountTarget",
           "rds:DeleteDBCluster",
           "rds:DeleteDBInstance",
+          "rds:DeleteTenantDatabase",
           "fsx:DeleteFileSystem",
           "fsx:DeleteVolume"
         ],
@@ -116,7 +117,7 @@
       }
     ]
   },
-  "VersionId": "v2",
+  "VersionId": "v3",
   "IsDefaultVersion": true,
-  "CreateDate": "2024-02-14T22:42:37+00:00"
+  "CreateDate": "2026-03-18T22:12:13+00:00"
 }
