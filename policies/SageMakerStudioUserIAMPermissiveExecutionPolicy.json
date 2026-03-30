@@ -128,7 +128,9 @@
           "datazone:StopNotebookCompute",
           "datazone:StartConversation",
           "datazone:GenerateCode",
-          "datazone:SendMessage"
+          "datazone:SendMessage",
+          "datazone:StartNotebookImport",
+          "datazone:StartNotebookExport"
         ],
         "Resource": "*"
       },
@@ -609,7 +611,7 @@
       }
     ]
   },
-  "VersionId": "v16",
+  "VersionId": "v17",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-03-05T17:42:12+00:00"
+  "CreateDate": "2026-03-27T17:27:10+00:00"
 }

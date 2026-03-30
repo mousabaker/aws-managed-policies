@@ -126,7 +126,7 @@
         }
       },
       {
-        "Sid": "AllowGlueCreateEniOnSecurityGroup",
+        "Sid": "GlueENIonSG",
         "Effect": "Allow",
         "Action": [
           "ec2:CreateNetworkInterface"
@@ -141,7 +141,7 @@
         }
       },
       {
-        "Sid": "AllowGlueCreateEniOnSubnet",
+        "Sid": "GlueENIonSubnet",
         "Effect": "Allow",
         "Action": [
           "ec2:CreateNetworkInterface"
@@ -154,7 +154,7 @@
         }
       },
       {
-        "Sid": "AllowManageGlueEni",
+        "Sid": "GlueNetwork",
         "Effect": "Allow",
         "Action": [
           "ec2:DeleteNetworkInterface",
@@ -172,7 +172,7 @@
         }
       },
       {
-        "Sid": "AllowAttachGlueEniOnInstance",
+        "Sid": "GlueEniOnInstance",
         "Effect": "Allow",
         "Action": [
           "ec2:AttachNetworkInterface"
@@ -201,7 +201,7 @@
         }
       },
       {
-        "Sid": "FederatedDataConnectionGlueSecret",
+        "Sid": "GlueSecret",
         "Effect": "Allow",
         "Action": [
           "secretsmanager:DescribeSecret",
@@ -1108,7 +1108,20 @@
         }
       },
       {
-        "Sid": "GlueCrawlerPermissions",
+        "Sid": "S3TCatalogPermissions",
+        "Effect": "Allow",
+        "Action": [
+          "glue:*ColumnStatistics*",
+          "glue:*Database*",
+          "glue:*Partition*",
+          "glue:*Table*",
+          "glue:GetCatalog*",
+          "glue:GetUserDefinedFunction*"
+        ],
+        "Resource": "arn:*:glue:*:*:catalog/s3tablescatalog"
+      },
+      {
+        "Sid": "GlueCrawler",
         "Effect": "Allow",
         "Action": "glue:ListCrawls",
         "Resource": "arn:aws:glue:*:*:crawler/*",
@@ -1119,7 +1132,7 @@
         }
       },
       {
-        "Sid": "GlueGlobalTempDatabasePermissions",
+        "Sid": "GlueGlobalTempDb",
         "Effect": "Allow",
         "Action": [
           "glue:CreateDatabase",
@@ -1132,7 +1145,7 @@
         ]
       },
       {
-        "Sid": "GlueDefaultCatalogsPermissions",
+        "Sid": "GlueDefaultCatalogs",
         "Effect": "Allow",
         "Action": [
           "glue:GetCatalog",
@@ -1148,7 +1161,7 @@
         }
       },
       {
-        "Sid": "GlueNonDefaultCatalogsPermissions",
+        "Sid": "GlueNonDefaultCatalogs",
         "Effect": "Allow",
         "Action": [
           "glue:GetCatalog",
@@ -1165,7 +1178,7 @@
         }
       },
       {
-        "Sid": "GlueCatalogDatabasePermissions",
+        "Sid": "GlueCatalogDb",
         "Effect": "Allow",
         "Action": [
           "glue:CreateDatabase",
@@ -1178,7 +1191,7 @@
         ]
       },
       {
-        "Sid": "LakeFormationPermissionForDataLakeAccess",
+        "Sid": "LFforDL",
         "Effect": "Allow",
         "Action": [
           "lakeformation:GetDataAccess",
@@ -1250,7 +1263,7 @@
         }
       },
       {
-        "Sid": "SetContextForTrustedIdentityPropagation",
+        "Sid": "SetContextForTIP",
         "Effect": "Allow",
         "Action": [
           "sts:SetContext"
@@ -1307,7 +1320,7 @@
         "Resource": "*"
       },
       {
-        "Sid": "GlueEntitiesAccessForFederatedDatabase",
+        "Sid": "GlueEntities",
         "Effect": "Allow",
         "Action": [
           "glue:ListEntities",
@@ -1339,7 +1352,7 @@
         }
       },
       {
-        "Sid": "SQLWorkBenchActionsWithoutResourceType",
+        "Sid": "SQLWorkBench",
         "Effect": "Allow",
         "Action": [
           "sqlworkbench:PutTab",
@@ -1419,7 +1432,7 @@
         }
       },
       {
-        "Sid": "AllowAccessExistingRedshiftCompute",
+        "Sid": "ExistingRedshiftCompute",
         "Effect": "Allow",
         "Action": [
           "redshift-serverless:GetWorkgroup",
@@ -1528,7 +1541,7 @@
         }
       },
       {
-        "Sid": "RedshifServerlessCredentialsForManagedWorkgroup",
+        "Sid": "RssCreds",
         "Effect": "Allow",
         "Action": [
           "redshift-serverless:GetCredentials"
@@ -1840,7 +1853,7 @@
         "Resource": "*"
       },
       {
-        "Sid": "InvokeBedrockModel",
+        "Sid": "InvokeBRModel",
         "Effect": "Allow",
         "Action": [
           "bedrock:InvokeModel",
@@ -1882,7 +1895,7 @@
         }
       },
       {
-        "Sid": "InvokeBedrockModelAppInferenceProfilePermissions",
+        "Sid": "InvokeBedrockModel",
         "Effect": "Allow",
         "Action": [
           "bedrock:GetInferenceProfile",
@@ -2788,7 +2801,7 @@
       }
     ]
   },
-  "VersionId": "v63",
+  "VersionId": "v64",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-03-02T20:27:10+00:00"
+  "CreateDate": "2026-03-25T21:12:09+00:00"
 }
