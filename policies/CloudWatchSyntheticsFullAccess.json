@@ -25,10 +25,21 @@
           "iam:ListRoles",
           "s3:ListAllMyBuckets",
           "xray:GetTraceSummaries",
-          "xray:BatchGetTraces",
-          "apigateway:GET"
+          "xray:BatchGetTraces"
         ],
         "Resource": "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "apigateway:GET"
+        ],
+        "Resource": [
+          "arn:aws:apigateway:*::/restapis",
+          "arn:aws:apigateway:*::/restapis/*/stages",
+          "arn:aws:apigateway:*::/restapis/*/stages/*/exports/swagger",
+          "arn:aws:apigateway:*::/apis"
+        ]
       },
       {
         "Effect": "Allow",
@@ -83,7 +94,8 @@
         "Effect": "Allow",
         "Action": [
           "cloudwatch:GetMetricData",
-          "cloudwatch:GetMetricStatistics"
+          "cloudwatch:GetMetricStatistics",
+          "cloudwatch:ListMetrics"
         ],
         "Resource": "*"
       },
@@ -219,7 +231,7 @@
       }
     ]
   },
-  "VersionId": "v13",
+  "VersionId": "v14",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:59:27+00:00"
+  "CreateDate": "2026-03-31T21:12:14+00:00"
 }

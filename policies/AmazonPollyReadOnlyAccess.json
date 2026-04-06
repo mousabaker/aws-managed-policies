@@ -10,7 +10,8 @@
           "polly:GetSpeechSynthesisTask",
           "polly:ListLexicons",
           "polly:ListSpeechSynthesisTasks",
-          "polly:SynthesizeSpeech"
+          "polly:SynthesizeSpeech",
+          "polly:StartSpeechSynthesisStream"
         ],
         "Resource": [
           "*"
@@ -18,7 +19,7 @@
       }
     ]
   },
-  "VersionId": "v2",
+  "VersionId": "v3",
   "IsDefaultVersion": true,
-  "CreateDate": "2018-07-17T16:41:07+00:00"
+  "CreateDate": "2026-04-01T08:12:15+00:00"
 }
