@@ -138,7 +138,10 @@
         "Sid": "AllowActionsForALB",
         "Effect": "Allow",
         "Action": [
-          "elasticloadbalancing:SetWebAcl"
+          "elasticloadbalancing:SetWebAcl",
+          "elasticloadbalancing:CreateWebACLAssociation",
+          "elasticloadbalancing:DeleteWebACLAssociation",
+          "elasticloadbalancing:GetLoadBalancerWebACL"
         ],
         "Resource": "arn:aws:elasticloadbalancing:*:*:loadbalancer/app/*/*"
       },
@@ -146,7 +149,8 @@
         "Sid": "AllowListActionsForALB",
         "Effect": "Allow",
         "Action": [
-          "elasticloadbalancing:DescribeLoadBalancers"
+          "elasticloadbalancing:DescribeLoadBalancers",
+          "elasticloadbalancing:DescribeWebACLAssociation"
         ],
         "Resource": "*"
       },
@@ -170,7 +174,10 @@
         "Sid": "AllowActionsForAppSync",
         "Effect": "Allow",
         "Action": [
-          "appsync:SetWebACL"
+          "appsync:SetWebACL",
+          "appsync:AssociateWebACL",
+          "appsync:DisassociateWebACL",
+          "appsync:GetWebACLForResource"
         ],
         "Resource": "arn:aws:appsync:*:*:apis/*"
       },
@@ -179,7 +186,8 @@
         "Effect": "Allow",
         "Action": [
           "appsync:ListGraphqlApis",
-          "appsync:ListApis"
+          "appsync:ListApis",
+          "appsync:ListResourcesForWebACL"
         ],
         "Resource": "*"
       },
@@ -366,7 +374,7 @@
       }
     ]
   },
-  "VersionId": "v20",
+  "VersionId": "v21",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:03:13+00:00"
+  "CreateDate": "2026-04-08T22:12:10+00:00"
 }
