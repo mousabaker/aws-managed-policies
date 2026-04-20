@@ -525,6 +525,7 @@
           "connect:ListRules",
           "connect:ListSecurityKeys",
           "connect:ListSecurityProfileApplications",
+          "connect:ListSecurityProfileFlowModules",
           "connect:ListSecurityProfilePermissions",
           "connect:ListSecurityProfiles",
           "connect:ListTagsForResource",
@@ -1908,6 +1909,7 @@
           "s3tables:GetTableBucketMaintenanceConfiguration",
           "s3tables:GetTableBucketMetricsConfiguration",
           "s3tables:GetTableBucketPolicy",
+          "s3tables:GetTableBucketReplication",
           "s3tables:GetTableBucketStorageClass",
           "s3tables:ListTableBuckets",
           "s3tables:ListTagsForResource",
@@ -2289,7 +2291,7 @@
       }
     ]
   },
-  "VersionId": "v68",
+  "VersionId": "v69",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-04-07T21:42:20+00:00"
+  "CreateDate": "2026-04-17T16:27:13+00:00"
 }
