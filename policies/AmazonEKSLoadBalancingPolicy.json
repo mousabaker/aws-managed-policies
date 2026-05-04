@@ -126,7 +126,8 @@
           "elasticloadbalancing:RemoveListenerCertificates",
           "elasticloadbalancing:ModifyRule",
           "elasticloadbalancing:ModifyIpPools",
-          "elasticloadbalancing:ModifyCapacityReservation"
+          "elasticloadbalancing:ModifyCapacityReservation",
+          "elasticloadbalancing:DescribeLoadBalancers"
         ],
         "Resource": "*",
         "Condition": {
@@ -223,7 +224,7 @@
       }
     ]
   },
-  "VersionId": "v6",
+  "VersionId": "v7",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-04-14T20:27:17+00:00"
+  "CreateDate": "2026-04-27T22:12:10+00:00"
 }
