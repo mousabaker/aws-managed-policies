@@ -1215,6 +1215,7 @@
         "Effect": "Allow",
         "Action": [
           "datazone:GenerateCode",
+          "datazone:CreateAsset*",
           "datazone:List*",
           "datazone:Search*",
           "datazone:*Message*",
@@ -1255,7 +1256,7 @@
       }
     ]
   },
-  "VersionId": "v39",
+  "VersionId": "v40",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-05-13T20:12:23+00:00"
+  "CreateDate": "2026-05-21T16:57:25+00:00"
 }

@@ -1121,12 +1121,26 @@
               "aws:ResourceAccount": "${aws:PrincipalAccount}"
             }
           }
+        },
+        {
+          "Sid": "AllowSecretsManagerOperatorActions",
+          "Effect": "Allow",
+          "Action": [
+            "secretsmanager:CreateSecret",
+            "secretsmanager:ListSecrets"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
         }
       ]
     },
-    "VersionId": "v3",
+    "VersionId": "v4",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-05-07T00:42:18+00:00"
+    "CreateDate": "2026-05-22T00:12:17+00:00"
   },
   "AIOpsAssistantIncidentReportPolicy": {
     "Document": {
@@ -4297,6 +4311,7 @@
           "Effect": "Allow",
           "Action": [
             "ecs:DescribeServices",
+            "ecs:DescribeServiceRevisions",
             "ecs:UpdateService",
             "cloudwatch:PutMetricAlarm",
             "cloudwatch:DescribeAlarms",
@@ -4309,9 +4324,9 @@
         }
       ]
     },
-    "VersionId": "v2",
+    "VersionId": "v3",
     "IsDefaultVersion": true,
-    "CreateDate": "2024-10-24T20:05:50+00:00"
+    "CreateDate": "2026-05-20T21:27:13+00:00"
   },
   "AWSApplicationAutoscalingEMRInstanceGroupPolicy": {
     "Document": {
@@ -19699,12 +19714,18 @@
             "cloudformation:ActivateType"
           ],
           "Resource": "arn:aws:cloudformation:*:*:type/hook/AWS-ControlTower*"
+        },
+        {
+          "Sid": "AllowBatchDescribeTypeConfigurationsForHookConfigFetch",
+          "Effect": "Allow",
+          "Action": "cloudformation:BatchDescribeTypeConfigurations",
+          "Resource": "*"
         }
       ]
     },
-    "VersionId": "v10",
+    "VersionId": "v11",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-02-12T18:01:38+00:00"
+    "CreateDate": "2026-05-20T19:27:15+00:00"
   },
   "AWSControlTowerCloudTrailRolePolicy": {
     "Document": {
@@ -19970,10 +19991,15 @@
           "Action": [
             "cloudformation:SetTypeConfiguration",
             "cloudformation:DeactivateType",
-            "cloudformation:ActivateType",
-            "cloudformation:BatchDescribeTypeConfigurations"
+            "cloudformation:ActivateType"
           ],
           "Resource": "arn:aws:cloudformation:*:*:type/hook/AWS-ControlTower*"
+        },
+        {
+          "Sid": "AllowBatchDescribeTypeConfigurationsForHookConfigFetch",
+          "Effect": "Allow",
+          "Action": "cloudformation:BatchDescribeTypeConfigurations",
+          "Resource": "*"
         },
         {
           "Sid": "AllowActionsForCloudFormationStackSetOrganizationsTrustedAccess",
@@ -19986,9 +20012,9 @@
         }
       ]
     },
-    "VersionId": "v20",
+    "VersionId": "v21",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-03-23T18:42:11+00:00"
+    "CreateDate": "2026-05-20T20:12:23+00:00"
   },
   "AWSCostAndUsageReportAutomationPolicy": {
     "Document": {
@@ -25254,12 +25280,29 @@
             "s3:ListBucket"
           ],
           "Resource": "arn:aws:s3:::elasticbeanstalk-*"
+        },
+        {
+          "Sid": "AllowCloudWatchLogsListAndDescribe",
+          "Effect": "Allow",
+          "Action": [
+            "logs:DescribeLogGroups",
+            "logs:DescribeLogStreams"
+          ],
+          "Resource": "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk/*"
+        },
+        {
+          "Sid": "AllowCloudWatchLogsRead",
+          "Effect": "Allow",
+          "Action": [
+            "logs:GetLogEvents"
+          ],
+          "Resource": "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk/*:log-stream:*"
         }
       ]
     },
-    "VersionId": "v1",
+    "VersionId": "v2",
     "IsDefaultVersion": true,
-    "CreateDate": "2021-01-22T19:02:37+00:00"
+    "CreateDate": "2026-05-19T13:27:10+00:00"
   },
   "AWSElasticBeanstalkRoleCWL": {
     "Document": {
@@ -69618,11 +69661,11 @@
             "iam:CreateServiceLinkedRole"
           ],
           "Resource": [
-            "arn:aws:iam::*:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling*",
-            "arn:aws:iam::*:role/aws-service-role/elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk*",
-            "arn:aws:iam::*:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing*",
-            "arn:aws:iam::*:role/aws-service-role/managedupdates.elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk*",
-            "arn:aws:iam::*:role/aws-service-role/maintenance.elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk*"
+            "arn:aws:iam::*:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
+            "arn:aws:iam::*:role/aws-service-role/elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk",
+            "arn:aws:iam::*:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing",
+            "arn:aws:iam::*:role/aws-service-role/managedupdates.elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk",
+            "arn:aws:iam::*:role/aws-service-role/maintenance.elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk"
           ],
           "Condition": {
             "StringLike": {
@@ -69644,6 +69687,13 @@
             "logs:PutRetentionPolicy"
           ],
           "Resource": "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk/*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:GetLogEvents"
+          ],
+          "Resource": "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk/*:log-stream:*"
         },
         {
           "Effect": "Allow",
@@ -69731,9 +69781,9 @@
         }
       ]
     },
-    "VersionId": "v9",
+    "VersionId": "v10",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-02-12T18:00:37+00:00"
+    "CreateDate": "2026-05-19T20:12:27+00:00"
   },
   "AdministratorAccess-Amplify": {
     "Document": {
@@ -74559,79 +74609,21 @@
           "Sid": "AllowWisdomForConnectEnabledTaggedResources",
           "Effect": "Allow",
           "Action": [
-            "wisdom:CreateContent",
-            "wisdom:DeleteContent",
-            "wisdom:CreateKnowledgeBase",
-            "wisdom:GetAssistant",
-            "wisdom:GetKnowledgeBase",
-            "wisdom:GetContent",
-            "wisdom:GetRecommendations",
-            "wisdom:GetSession",
-            "wisdom:NotifyRecommendationsReceived",
-            "wisdom:QueryAssistant",
-            "wisdom:StartContentUpload",
-            "wisdom:UpdateContent",
-            "wisdom:UntagResource",
-            "wisdom:TagResource",
-            "wisdom:CreateSession",
-            "wisdom:CreateQuickResponse",
-            "wisdom:GetQuickResponse",
-            "wisdom:SearchQuickResponses",
-            "wisdom:StartImportJob",
-            "wisdom:GetImportJob",
-            "wisdom:ListImportJobs",
-            "wisdom:ListQuickResponses",
-            "wisdom:UpdateQuickResponse",
-            "wisdom:DeleteQuickResponse",
-            "wisdom:PutFeedback",
-            "wisdom:ListContentAssociations",
-            "wisdom:CreateMessageTemplate",
-            "wisdom:UpdateMessageTemplate",
-            "wisdom:UpdateMessageTemplateMetadata",
-            "wisdom:GetMessageTemplate",
-            "wisdom:DeleteMessageTemplate",
-            "wisdom:ListMessageTemplates",
-            "wisdom:SearchMessageTemplates",
-            "wisdom:ActivateMessageTemplate",
-            "wisdom:DeactivateMessageTemplate",
-            "wisdom:CreateMessageTemplateVersion",
-            "wisdom:ListMessageTemplateVersions",
-            "wisdom:CreateMessageTemplateAttachment",
-            "wisdom:DeleteMessageTemplateAttachment",
-            "wisdom:RenderMessageTemplate",
-            "wisdom:CreateAIAgent",
-            "wisdom:CreateAIAgentVersion",
-            "wisdom:DeleteAIAgent",
-            "wisdom:DeleteAIAgentVersion",
-            "wisdom:UpdateAIAgent",
-            "wisdom:UpdateAssistantAIAgent",
-            "wisdom:RemoveAssistantAIAgent",
-            "wisdom:GetAIAgent",
-            "wisdom:ListAIAgents",
-            "wisdom:ListAIAgentVersions",
-            "wisdom:CreateAIPrompt",
-            "wisdom:CreateAIPromptVersion",
-            "wisdom:DeleteAIPrompt",
-            "wisdom:DeleteAIPromptVersion",
-            "wisdom:UpdateAIPrompt",
-            "wisdom:GetAIPrompt",
-            "wisdom:ListAIPrompts",
-            "wisdom:ListAIPromptVersions",
-            "wisdom:CreateAIGuardrail",
-            "wisdom:CreateAIGuardrailVersion",
-            "wisdom:DeleteAIGuardrail",
-            "wisdom:DeleteAIGuardrailVersion",
-            "wisdom:UpdateAIGuardrail",
-            "wisdom:GetAIGuardrail",
-            "wisdom:ListAIGuardrails",
-            "wisdom:ListAIGuardrailVersions",
-            "wisdom:CreateAssistant",
-            "wisdom:ListTagsForResource",
-            "wisdom:SendMessage",
-            "wisdom:GetNextMessage",
-            "wisdom:ListMessages",
-            "wisdom:Retrieve",
-            "wisdom:ListAssistantAssociations"
+            "wisdom:*"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceTag/AmazonConnectEnabled": "True"
+            }
+          }
+        },
+        {
+          "Sid": "DenyWisdomForConnectEnabledTaggedResources",
+          "Effect": "Deny",
+          "Action": [
+            "wisdom:DeleteAssistant",
+            "wisdom:DeleteKnowledgeBase"
           ],
           "Resource": "*",
           "Condition": {
@@ -74735,8 +74727,8 @@
           "Resource": "arn:aws:chime:*:*:vc/*",
           "Condition": {
             "StringEquals": {
-              "aws:ResourceTag/AmazonConnectEnabled": "True",
-              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+              "aws:ResourceAccount": "${aws:PrincipalAccount}",
+              "aws:ResourceTag/AmazonConnectEnabled": "True"
             }
           }
         },
@@ -74820,8 +74812,8 @@
           "Resource": "arn:aws:social-messaging:*:*:phone-number-id/*",
           "Condition": {
             "StringEquals": {
-              "aws:ResourceTag/AmazonConnectEnabled": "True",
-              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+              "aws:ResourceAccount": "${aws:PrincipalAccount}",
+              "aws:ResourceTag/AmazonConnectEnabled": "True"
             }
           }
         },
@@ -74848,8 +74840,8 @@
           "Resource": "arn:aws:social-messaging:*:*:waba/*",
           "Condition": {
             "StringEquals": {
-              "aws:ResourceTag/AmazonConnectEnabled": "True",
-              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+              "aws:ResourceAccount": "${aws:PrincipalAccount}",
+              "aws:ResourceTag/AmazonConnectEnabled": "True"
             }
           }
         },
@@ -74878,9 +74870,9 @@
         }
       ]
     },
-    "VersionId": "v53",
+    "VersionId": "v54",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-02-12T17:59:17+00:00"
+    "CreateDate": "2026-05-18T21:12:24+00:00"
   },
   "AmazonConnectSynchronizationServiceRolePolicy": {
     "Document": {
@@ -84920,12 +84912,17 @@
               "iam:AWSServiceName": "spot.amazonaws.com"
             }
           }
+        },
+        {
+          "Effect": "Allow",
+          "Action": "ec2:DescribeCapacityReservations",
+          "Resource": "*"
         }
       ]
     },
-    "VersionId": "v6",
+    "VersionId": "v7",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-04-17T21:27:07+00:00"
+    "CreateDate": "2026-05-18T21:12:10+00:00"
   },
   "AmazonEKSConnectorServiceRolePolicy": {
     "Document": {
@@ -96816,12 +96813,23 @@
             "sts:SetContext"
           ],
           "Resource": "arn:aws:sts::*:self"
+        },
+        {
+          "Sid": "AllowQArtifactsAccess",
+          "Effect": "Allow",
+          "Action": [
+            "q:CreateArtifact",
+            "q:GetArtifact",
+            "q:GetArtifactActionResult",
+            "q:PerformArtifactAction"
+          ],
+          "Resource": "*"
         }
       ]
     },
-    "VersionId": "v6",
+    "VersionId": "v7",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-02-12T18:00:28+00:00"
+    "CreateDate": "2026-05-20T23:12:16+00:00"
   },
   "AmazonQFullAccess": {
     "Document": {
@@ -96860,6 +96868,17 @@
           "Resource": "*"
         },
         {
+          "Sid": "AllowQArtifactsAccess",
+          "Effect": "Allow",
+          "Action": [
+            "q:CreateArtifact",
+            "q:GetArtifact",
+            "q:GetArtifactActionResult",
+            "q:PerformArtifactAction"
+          ],
+          "Resource": "*"
+        },
+        {
           "Sid": "AllowCloudControlReadAccess",
           "Effect": "Allow",
           "Action": [
@@ -96893,9 +96912,9 @@
         }
       ]
     },
-    "VersionId": "v11",
+    "VersionId": "v12",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-02-12T18:00:32+00:00"
+    "CreateDate": "2026-05-20T22:27:23+00:00"
   },
   "AmazonQLDBConsoleFullAccess": {
     "Document": {
@@ -128134,6 +128153,32 @@
             "acm:List*",
             "acm:SearchCertificates",
             "action-recommendations:ListRecommendedActions",
+            "aidevops:DescribePrivateConnection",
+            "aidevops:DescribeServices",
+            "aidevops:GetAccountUsage",
+            "aidevops:GetAgentSpace",
+            "aidevops:GetAssociation",
+            "aidevops:GetBacklogTask",
+            "aidevops:GetKnowledgeItem",
+            "aidevops:GetOperatorApp",
+            "aidevops:GetRecommendation",
+            "aidevops:GetService",
+            "aidevops:ListAgentSpaces",
+            "aidevops:ListAssociations",
+            "aidevops:ListBacklogTasks",
+            "aidevops:ListChats",
+            "aidevops:ListExecutions",
+            "aidevops:ListGoals",
+            "aidevops:ListJournalRecords",
+            "aidevops:ListKnowledgeItems",
+            "aidevops:ListKnowledgeItemVersions",
+            "aidevops:ListPendingMessages",
+            "aidevops:ListPrivateConnections",
+            "aidevops:ListRecommendations",
+            "aidevops:ListServices",
+            "aidevops:ListTagsForResource",
+            "aidevops:ListWebhooks",
+            "aidevops:SearchServiceAccessibleResource",
             "aiops:GetEphemeralInvestigationResults",
             "aiops:GetFact",
             "aiops:GetFactVersions",
@@ -130933,9 +130978,9 @@
         }
       ]
     },
-    "VersionId": "v184",
+    "VersionId": "v185",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-05-07T16:12:21+00:00"
+    "CreateDate": "2026-05-18T15:42:10+00:00"
   },
   "ResourceGroupsServiceRolePolicy": {
     "Document": {
@@ -140532,6 +140577,7 @@
           "Effect": "Allow",
           "Action": [
             "datazone:GenerateCode",
+            "datazone:CreateAsset*",
             "datazone:List*",
             "datazone:Search*",
             "datazone:*Message*",
@@ -140572,9 +140618,9 @@
         }
       ]
     },
-    "VersionId": "v39",
+    "VersionId": "v40",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-05-13T20:12:23+00:00"
+    "CreateDate": "2026-05-21T16:57:25+00:00"
   },
   "SageMakerStudioProjectUserRolePermissionsBoundary": {
     "Document": {
@@ -148420,6 +148466,13 @@
             "s3tables:ListNamespaces",
             "s3tables:ListTableBuckets",
             "s3tables:ListTables",
+            "s3vectors:GetIndex",
+            "s3vectors:GetVectorBucket",
+            "s3vectors:GetVectorBucketPolicy",
+            "s3vectors:GetVectors",
+            "s3vectors:ListIndexes",
+            "s3vectors:ListVectorBuckets",
+            "s3vectors:ListVectors",
             "sagemaker:Describe*",
             "sagemaker:List*",
             "schemas:DescribeCodeBinding",
@@ -148688,9 +148741,9 @@
         }
       ]
     },
-    "VersionId": "v87",
+    "VersionId": "v88",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-05-07T16:12:08+00:00"
+    "CreateDate": "2026-05-18T15:42:13+00:00"
   },
   "SecurityLakeResourceManagementServiceRolePolicy": {
     "Document": {
@@ -150916,12 +150969,26 @@
           "Resource": [
             "arn:aws:firehose:*:*:deliverystream/aws-waf-logs-*"
           ]
+        },
+        {
+          "Sid": "KMSForFirehoseSSECMK",
+          "Effect": "Allow",
+          "Action": [
+            "kms:GenerateDataKey",
+            "kms:Decrypt"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "kms:ViaService": "firehose.*.amazonaws.com"
+            }
+          }
         }
       ]
     },
-    "VersionId": "v1",
+    "VersionId": "v2",
     "IsDefaultVersion": true,
-    "CreateDate": "2018-08-24T21:05:47+00:00"
+    "CreateDate": "2026-05-20T19:12:17+00:00"
   },
   "WAFRegionalLoggingServiceRolePolicy": {
     "Document": {
@@ -150936,12 +151003,26 @@
           "Resource": [
             "arn:aws:firehose:*:*:deliverystream/aws-waf-logs-*"
           ]
+        },
+        {
+          "Sid": "KMSForFirehoseSSECMK",
+          "Effect": "Allow",
+          "Action": [
+            "kms:GenerateDataKey",
+            "kms:Decrypt"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "kms:ViaService": "firehose.*.amazonaws.com"
+            }
+          }
         }
       ]
     },
-    "VersionId": "v1",
+    "VersionId": "v2",
     "IsDefaultVersion": true,
-    "CreateDate": "2018-08-24T18:40:55+00:00"
+    "CreateDate": "2026-05-20T18:42:25+00:00"
   },
   "WAFV2LoggingServiceRolePolicy": {
     "Document": {
@@ -150963,12 +151044,26 @@
           "Effect": "Allow",
           "Action": "organizations:DescribeOrganization",
           "Resource": "*"
+        },
+        {
+          "Sid": "KMSForFirehoseSSECMK",
+          "Effect": "Allow",
+          "Action": [
+            "kms:GenerateDataKey",
+            "kms:Decrypt"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "kms:ViaService": "firehose.*.amazonaws.com"
+            }
+          }
         }
       ]
     },
-    "VersionId": "v3",
+    "VersionId": "v4",
     "IsDefaultVersion": true,
-    "CreateDate": "2024-06-03T17:29:04+00:00"
+    "CreateDate": "2026-05-20T18:12:21+00:00"
   },
   "WellArchitectedConsoleFullAccess": {
     "Document": {
