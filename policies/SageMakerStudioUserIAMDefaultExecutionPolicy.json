@@ -55,7 +55,8 @@
           "datazone:StartConversation",
           "datazone:GenerateCode",
           "datazone:SendMessage",
-          "datazone:CancelMessage"
+          "datazone:CancelMessage",
+          "datazone:QueryGraph"
         ],
         "Resource": "*"
       },
@@ -928,7 +929,7 @@
       }
     ]
   },
-  "VersionId": "v24",
+  "VersionId": "v25",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-05-11T20:42:23+00:00"
+  "CreateDate": "2026-05-26T17:27:26+00:00"
 }

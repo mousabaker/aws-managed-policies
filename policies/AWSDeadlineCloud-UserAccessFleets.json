@@ -115,9 +115,11 @@
           "deadline:AssumeFleetRoleForRead",
           "deadline:GetFleet",
           "deadline:GetQueueFleetAssociation",
+          "deadline:GetVolume",
           "deadline:GetWorker",
           "deadline:ListQueueFleetAssociations",
           "deadline:ListSessionsForWorker",
+          "deadline:ListVolumes",
           "deadline:ListWorkers",
           "deadline:SearchWorkers"
         ],
@@ -152,7 +154,7 @@
       }
     ]
   },
-  "VersionId": "v1",
+  "VersionId": "v2",
   "IsDefaultVersion": true,
-  "CreateDate": "2024-04-01T17:01:50+00:00"
+  "CreateDate": "2026-05-29T21:27:30+00:00"
 }

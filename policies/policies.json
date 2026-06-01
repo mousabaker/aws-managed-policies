@@ -5248,6 +5248,268 @@
     "IsDefaultVersion": true,
     "CreateDate": "2026-02-12T18:00:41+00:00"
   },
+  "AWSApplicationMigrationFSxProxyPolicy": {
+    "Document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "FSxSecret",
+          "Effect": "Allow",
+          "Action": "secretsmanager:GetSecretValue",
+          "Resource": "arn:aws:secretsmanager:*:*:secret:*",
+          "Condition": {
+            "Null": {
+              "aws:ResourceTag/AWSApplicationMigrationServiceManaged": "false"
+            }
+          }
+        },
+        {
+          "Sid": "FSxDescribe",
+          "Effect": "Allow",
+          "Action": [
+            "fsx:DescribeVolumes",
+            "fsx:DescribeStorageVirtualMachines"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "FSxCreateVolume",
+          "Effect": "Allow",
+          "Action": "fsx:CreateVolume",
+          "Resource": "arn:aws:fsx:*:*:volume/*/*",
+          "Condition": {
+            "Null": {
+              "aws:RequestTag/AWSApplicationMigrationServiceManaged": "false"
+            }
+          }
+        },
+        {
+          "Sid": "FSxCreateVolumeSVM",
+          "Effect": "Allow",
+          "Action": "fsx:CreateVolume",
+          "Resource": "arn:aws:fsx:*:*:storage-virtual-machine/*/*"
+        },
+        {
+          "Sid": "FSxTagging",
+          "Effect": "Allow",
+          "Action": [
+            "fsx:TagResource",
+            "fsx:UntagResource"
+          ],
+          "Resource": "arn:aws:fsx:*:*:volume/*/*",
+          "Condition": {
+            "Null": {
+              "aws:ResourceTag/AWSApplicationMigrationServiceManaged": "false"
+            }
+          }
+        },
+        {
+          "Sid": "FSxUpdateAndDeleteVolume",
+          "Effect": "Allow",
+          "Action": [
+            "fsx:UpdateVolume",
+            "fsx:DeleteVolume"
+          ],
+          "Resource": "arn:aws:fsx:*:*:volume/*/*",
+          "Condition": {
+            "Null": {
+              "aws:ResourceTag/AWSApplicationMigrationServiceManaged": "false"
+            }
+          }
+        }
+      ]
+    },
+    "VersionId": "v1",
+    "IsDefaultVersion": true,
+    "CreateDate": "2026-05-31T13:12:14+00:00"
+  },
+  "AWSApplicationMigrationFSxProxyVPCPolicy": {
+    "Document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowlistAllVPCsforSGCreation",
+          "Effect": "Allow",
+          "Action": "ec2:CreateSecurityGroup",
+          "Resource": "arn:aws:ec2:*:*:vpc/*"
+        },
+        {
+          "Sid": "CreateServiceEndpointResources",
+          "Effect": "Allow",
+          "Action": [
+            "ec2:CreateSecurityGroup",
+            "ec2:CreateVpcEndpointServiceConfiguration"
+          ],
+          "Resource": [
+            "arn:aws:ec2:*:*:security-group/*",
+            "arn:aws:ec2:*:*:vpc-endpoint-service/*"
+          ],
+          "Condition": {
+            "Null": {
+              "aws:RequestTag/file_system_id": "false",
+              "aws:RequestTag/AWSApplicationMigrationServiceManaged": "false"
+            }
+          }
+        },
+        {
+          "Sid": "EC2AllowOperationsOnTaggedResources",
+          "Effect": "Allow",
+          "Action": [
+            "ec2:AuthorizeSecurityGroupIngress",
+            "ec2:DeleteSecurityGroup",
+            "ec2:DeleteVpcEndpointServiceConfigurations"
+          ],
+          "Resource": [
+            "arn:aws:ec2:*:*:security-group/*",
+            "arn:aws:ec2:*:*:vpc-endpoint-service/*"
+          ],
+          "Condition": {
+            "Null": {
+              "aws:ResourceTag/file_system_id": "false",
+              "aws:ResourceTag/AWSApplicationMigrationServiceManaged": "false"
+            }
+          }
+        },
+        {
+          "Sid": "DescribeOperations",
+          "Effect": "Allow",
+          "Action": [
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeVpcEndpoints",
+            "ec2:DescribeVpcs",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeAccountAttributes",
+            "ec2:DescribeAvailabilityZones",
+            "ec2:DescribeVpcEndpointServiceConfigurations",
+            "ec2:DescribeVpcEndpointConnections",
+            "ec2:GetSecurityGroupsForVpc",
+            "fsx:DescribeFileSystems",
+            "fsx:DescribeStorageVirtualMachines",
+            "elasticloadbalancing:DescribeLoadBalancers",
+            "elasticloadbalancing:DescribeTargetGroups",
+            "ec2:DescribeInternetGateways",
+            "elasticloadbalancing:DescribeTags"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "ModifyVpcEndpointOperations",
+          "Effect": "Allow",
+          "Action": [
+            "ec2:ModifyVpcEndpointServicePermissions",
+            "ec2:AcceptVpcEndpointConnections"
+          ],
+          "Resource": "arn:aws:ec2:*:*:vpc-endpoint-service/*",
+          "Condition": {
+            "Null": {
+              "aws:ResourceTag/file_system_id": "false",
+              "aws:ResourceTag/AWSApplicationMigrationServiceManaged": "false"
+            }
+          }
+        },
+        {
+          "Sid": "EC2AllowTaggingOnCreate",
+          "Effect": "Allow",
+          "Action": "ec2:CreateTags",
+          "Resource": [
+            "arn:aws:ec2:*:*:security-group/*",
+            "arn:aws:ec2:*:*:vpc-endpoint-service/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "ec2:CreateAction": [
+                "CreateSecurityGroup",
+                "CreateVpcEndpointServiceConfiguration"
+              ]
+            }
+          }
+        },
+        {
+          "Sid": "CreateFSxNLB",
+          "Effect": "Allow",
+          "Action": [
+            "elasticloadbalancing:CreateLoadBalancer",
+            "elasticloadbalancing:CreateTargetGroup",
+            "elasticloadbalancing:CreateListener"
+          ],
+          "Resource": [
+            "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/MgnFSxProxy*NLB/*",
+            "arn:aws:elasticloadbalancing:*:*:targetgroup/MgnFSxProxy*/*"
+          ],
+          "Condition": {
+            "Null": {
+              "aws:RequestTag/file_system_id": "false",
+              "aws:RequestTag/AWSApplicationMigrationServiceManaged": "false"
+            }
+          }
+        },
+        {
+          "Sid": "FSxNLBAllowTaggingOnCreate",
+          "Effect": "Allow",
+          "Action": "elasticloadbalancing:AddTags",
+          "Resource": [
+            "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/MgnFSxProxy*NLB/*",
+            "arn:aws:elasticloadbalancing:*:*:targetgroup/MgnFSxProxy*TG/*",
+            "arn:aws:elasticloadbalancing:*:*:listener/net/MgnFSxProxy*/*/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "elasticloadbalancing:CreateAction": [
+                "CreateLoadBalancer",
+                "CreateTargetGroup",
+                "CreateListener"
+              ]
+            }
+          }
+        },
+        {
+          "Sid": "FSxNLBRole",
+          "Effect": "Allow",
+          "Action": "iam:CreateServiceLinkedRole",
+          "Resource": "arn:aws:iam::*:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing",
+          "Condition": {
+            "StringEquals": {
+              "iam:AWSServiceName": "elasticloadbalancing.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Sid": "RegisterFSxTargetGroup",
+          "Effect": "Allow",
+          "Action": "elasticloadbalancing:RegisterTargets",
+          "Resource": "arn:aws:elasticloadbalancing:*:*:targetgroup/MgnFSxProxy*/*"
+        },
+        {
+          "Sid": "ELBv2AllowModify",
+          "Effect": "Allow",
+          "Action": "elasticloadbalancing:ModifyLoadBalancerAttributes",
+          "Resource": "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/MgnFSxProxy*/*"
+        },
+        {
+          "Sid": "ELBv2AllowOperationsOnTaggedResources",
+          "Effect": "Allow",
+          "Action": [
+            "elasticloadbalancing:DeleteLoadBalancer",
+            "elasticloadbalancing:DeleteTargetGroup"
+          ],
+          "Resource": [
+            "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/MgnFSxProxy*/*",
+            "arn:aws:elasticloadbalancing:*:*:listener/net/MgnFSxProxy*/*/*",
+            "arn:aws:elasticloadbalancing:*:*:targetgroup/MgnFSxProxy*/*"
+          ],
+          "Condition": {
+            "Null": {
+              "aws:ResourceTag/file_system_id": "false",
+              "aws:ResourceTag/AWSApplicationMigrationServiceManaged": "false"
+            }
+          }
+        }
+      ]
+    },
+    "VersionId": "v1",
+    "IsDefaultVersion": true,
+    "CreateDate": "2026-05-31T13:27:13+00:00"
+  },
   "AWSApplicationMigrationFullAccess": {
     "Document": {
       "Version": "2012-10-17",
@@ -5503,12 +5765,37 @@
               ]
             }
           }
+        },
+        {
+          "Sid": "FSxReadPermissions",
+          "Effect": "Allow",
+          "Action": [
+            "fsx:DescribeStorageVirtualMachines"
+          ],
+          "Resource": [
+            "*"
+          ]
+        },
+        {
+          "Sid": "AllowTagSVMWithMapMigrated",
+          "Effect": "Allow",
+          "Action": [
+            "fsx:TagResource"
+          ],
+          "Resource": "arn:aws:fsx:*:*:storage-virtual-machine/*",
+          "Condition": {
+            "ForAllValues:StringEquals": {
+              "aws:TagKeys": [
+                "map-migrated"
+              ]
+            }
+          }
         }
       ]
     },
-    "VersionId": "v11",
+    "VersionId": "v12",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-02-12T18:03:17+00:00"
+    "CreateDate": "2026-05-31T13:12:11+00:00"
   },
   "AWSApplicationMigrationMGHAccess": {
     "Document": {
@@ -6692,7 +6979,8 @@
             "mgn:UpdateAgentReplicationProcessStateForMgn",
             "mgn:NotifyAgentReplicationProgressForMgn",
             "mgn:NotifyAgentConnectedForMgn",
-            "mgn:NotifyAgentDisconnectedForMgn"
+            "mgn:NotifyAgentDisconnectedForMgn",
+            "mgn:StartSnapshotGroupForMgn"
           ],
           "Resource": "*"
         },
@@ -6740,9 +7028,9 @@
         }
       ]
     },
-    "VersionId": "v1",
+    "VersionId": "v2",
     "IsDefaultVersion": true,
-    "CreateDate": "2021-04-07T07:21:57+00:00"
+    "CreateDate": "2026-05-31T13:27:26+00:00"
   },
   "AWSApplicationMigrationSSMAccess": {
     "Document": {
@@ -21437,9 +21725,9 @@
             "identitystore:DescribeUser",
             "identitystore:ListGroupMembershipsForMember",
             "deadline:GetApplicationVersion",
+            "deadline:GetMonitorSettings",
             "ec2:DescribeInstanceTypes",
-            "identitystore:ListUsers",
-            "deadline:GetMonitorSettings"
+            "identitystore:ListUsers"
           ],
           "Resource": [
             "*"
@@ -21601,6 +21889,7 @@
             "deadline:GetStorageProfile",
             "deadline:GetStorageProfileForQueue",
             "deadline:GetTask",
+            "deadline:GetVolume",
             "deadline:GetWorker",
             "deadline:ListJobParameterDefinitions",
             "deadline:ListQueueEnvironments",
@@ -21614,6 +21903,7 @@
             "deadline:ListStorageProfiles",
             "deadline:ListStorageProfilesForQueue",
             "deadline:ListTasks",
+            "deadline:ListVolumes",
             "deadline:ListWorkers",
             "deadline:SearchJobs",
             "deadline:SearchSteps",
@@ -21690,9 +21980,9 @@
         }
       ]
     },
-    "VersionId": "v6",
+    "VersionId": "v7",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-04-08T16:42:08+00:00"
+    "CreateDate": "2026-05-29T20:27:22+00:00"
   },
   "AWSDeadlineCloud-UserAccessFleets": {
     "Document": {
@@ -21811,9 +22101,11 @@
             "deadline:AssumeFleetRoleForRead",
             "deadline:GetFleet",
             "deadline:GetQueueFleetAssociation",
+            "deadline:GetVolume",
             "deadline:GetWorker",
             "deadline:ListQueueFleetAssociations",
             "deadline:ListSessionsForWorker",
+            "deadline:ListVolumes",
             "deadline:ListWorkers",
             "deadline:SearchWorkers"
           ],
@@ -21848,9 +22140,9 @@
         }
       ]
     },
-    "VersionId": "v1",
+    "VersionId": "v2",
     "IsDefaultVersion": true,
-    "CreateDate": "2024-04-01T17:01:50+00:00"
+    "CreateDate": "2026-05-29T21:27:30+00:00"
   },
   "AWSDeadlineCloud-UserAccessJobs": {
     "Document": {
@@ -50102,6 +50394,30 @@
     "IsDefaultVersion": true,
     "CreateDate": "2026-02-12T18:00:12+00:00"
   },
+  "AWSResilienceHubServiceRolePolicy": {
+    "Document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AWSResilienceHubOrganizationsReadStatement",
+          "Effect": "Allow",
+          "Action": [
+            "organizations:DescribeOrganization",
+            "organizations:DescribeOrganizationalUnit",
+            "organizations:ListAccounts",
+            "organizations:ListChildren",
+            "organizations:ListOrganizationalUnitsForParent",
+            "organizations:ListParents",
+            "organizations:ListRoots"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "VersionId": "v1",
+    "IsDefaultVersion": true,
+    "CreateDate": "2026-05-28T17:42:17+00:00"
+  },
   "AWSResourceAccessManagerFullAccess": {
     "Document": {
       "Version": "2012-10-17",
@@ -74289,9 +74605,66 @@
             "connect:BatchPutContact",
             "connect:StopContact",
             "connect:DescribeContactFlow",
-            "connect:SendOutboundEmail"
+            "connect:SendOutboundEmail",
+            "connect:SendOutboundWebNotification"
           ],
           "Resource": "arn:aws:connect:*:*:instance/*"
+        },
+        {
+          "Sid": "ConnectChatAccess",
+          "Effect": "Allow",
+          "Action": [
+            "connect:SendOutboundChatMessage"
+          ],
+          "Resource": [
+            "arn:aws:connect:*:*:instance/*",
+            "arn:aws:connect:*:*:phone-number/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "AllowSocialMessagingSendMessageOperations",
+          "Effect": "Allow",
+          "Action": [
+            "social-messaging:SendWhatsAppMessage"
+          ],
+          "Resource": "arn:aws:social-messaging:*:*:phone-number-id/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceTag/AmazonConnectEnabled": "True",
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "AllowSocialMessagingTemplateOperations",
+          "Effect": "Allow",
+          "Action": [
+            "social-messaging:GetWhatsAppMessageTemplate"
+          ],
+          "Resource": "arn:aws:social-messaging:*:*:waba/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "AllowSMSVoiceOperationsForConnect",
+          "Effect": "Allow",
+          "Action": [
+            "sms-voice:SendTextMessage"
+          ],
+          "Resource": "arn:aws:sms-voice:*:*:phone-number/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
         },
         {
           "Sid": "EventBridgeListRuleAccess",
@@ -74352,9 +74725,9 @@
         }
       ]
     },
-    "VersionId": "v3",
+    "VersionId": "v4",
     "IsDefaultVersion": true,
-    "CreateDate": "2024-10-03T20:20:01+00:00"
+    "CreateDate": "2026-05-27T01:42:13+00:00"
   },
   "AmazonConnectReadOnlyAccess": {
     "Document": {
@@ -74454,135 +74827,49 @@
         {
           "Sid": "AllowCustomerProfilesForConnectDomain",
           "Effect": "Allow",
-          "Action": [
-            "profile:SearchProfiles",
-            "profile:CreateProfile",
-            "profile:UpdateProfile",
-            "profile:AddProfileKey",
-            "profile:ListProfileObjectTypes",
-            "profile:ListCalculatedAttributeDefinitions",
-            "profile:ListCalculatedAttributesForProfile",
-            "profile:GetDomain",
-            "profile:ListIntegrations",
-            "profile:GetIntegration",
-            "profile:PutIntegration",
-            "profile:DeleteIntegration",
-            "profile:ListEventTriggers",
-            "profile:ListSegmentDefinitions",
-            "profile:ListProfileAttributeValues",
-            "profile:CreateSegmentEstimate",
-            "profile:GetSegmentEstimate",
-            "profile:BatchGetProfile",
-            "profile:BatchGetCalculatedAttributeForProfile",
-            "profile:GetSegmentMembership",
-            "profile:ListDomainLayouts",
-            "profile:CreateUploadJob",
-            "profile:ListUploadJobs",
-            "profile:DetectProfileObjectType",
-            "profile:GetSimilarProfiles",
-            "profile:GetUploadJob",
-            "profile:GetUploadJobPath",
-            "profile:StartUploadJob",
-            "profile:StopUploadJob",
-            "profile:GetProfileRecommendations",
-            "profile:GetProfileInsights",
-            "profile:ListRecommenders"
-          ],
-          "Resource": "arn:aws:profile:*:*:domains/amazon-connect-*"
-        },
-        {
-          "Sid": "AllowCustomerProfilesEventTriggerForConnectDomain",
-          "Effect": "Allow",
-          "Action": [
-            "profile:CreateEventTrigger",
-            "profile:GetEventTrigger",
-            "profile:UpdateEventTrigger",
-            "profile:DeleteEventTrigger"
-          ],
+          "Action": "profile:*",
           "Resource": [
-            "arn:aws:profile:*:*:domains/amazon-connect-*/event-triggers/*"
-          ]
+            "arn:aws:profile:*:*:domains/amazon-connect-*",
+            "arn:aws:profile:*:*:/domains/amazon-connect-*",
+            "arn:aws:profile:*:*:/templates*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
         },
         {
-          "Sid": "AllowCustomerProfilesDomainLayoutsForConnectDomain",
+          "Sid": "AllowCustomerProfilesListOperations",
           "Effect": "Allow",
           "Action": [
-            "profile:CreateDomainLayout",
-            "profile:UpdateDomainLayout",
-            "profile:DeleteDomainLayout",
-            "profile:GetDomainLayout"
+            "profile:ListRecommenderRecipes",
+            "profile:ListAccountIntegrations",
+            "profile:ListDomains"
           ],
-          "Resource": [
-            "arn:aws:profile:*:*:domains/amazon-connect-*/layouts/*"
-          ]
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
         },
         {
-          "Sid": "AllowCustomerProfilesSegmentationImportForConnectDomain",
-          "Effect": "Allow",
+          "Sid": "DenyCustomerProfilesForConnectDomain",
+          "Effect": "Deny",
           "Action": [
-            "profile:GetUploadJob",
-            "profile:GetUploadJobPath",
-            "profile:StartUploadJob",
-            "profile:StopUploadJob"
+            "profile:CreateDomain",
+            "profile:UpdateDomain",
+            "profile:DeleteDomain",
+            "profile:CreateEventStream",
+            "profile:DeleteEventStream",
+            "profile:DeleteWorkflow",
+            "profile:DeleteProfileKey",
+            "profile:UntagResource",
+            "profile:TagResource",
+            "profile:CreateIntegrationWorkflow"
           ],
-          "Resource": [
-            "arn:aws:profile:*:*:domains/amazon-connect-*/upload-jobs/*"
-          ]
-        },
-        {
-          "Sid": "AllowReadPermissionForCustomerProfileObjects",
-          "Effect": "Allow",
-          "Action": [
-            "profile:ListProfileObjects",
-            "profile:GetProfileObjectType",
-            "profile:ListObjectTypeAttributes",
-            "profile:ListObjectTypeAttributeValues"
-          ],
-          "Resource": [
-            "arn:aws:profile:*:*:domains/amazon-connect-*/object-types/*"
-          ]
-        },
-        {
-          "Sid": "AllowReadPermissionForCustomerProfilePredictiveInsights",
-          "Effect": "Allow",
-          "Action": [
-            "profile:GetRecommender",
-            "profile:CreateRecommender",
-            "profile:UpdateRecommender",
-            "profile:DeleteRecommender",
-            "profile:StopRecommender",
-            "profile:StartRecommender"
-          ],
-          "Resource": [
-            "arn:aws:profile:*:*:domains/amazon-connect-*/recommenders/*"
-          ]
-        },
-        {
-          "Sid": "AllowReadPermissionForCustomerProfilesPersonalizeForRecommenderRecipes",
-          "Effect": "Allow",
-          "Action": [
-            "profile:ListRecommenderRecipes"
-          ],
-          "Resource": [
-            "arn:aws:profile:*:*:*"
-          ]
-        },
-        {
-          "Sid": "AllowListIntegrationForCustomerProfile",
-          "Effect": "Allow",
-          "Action": [
-            "profile:ListAccountIntegrations"
-          ],
-          "Resource": "*"
-        },
-        {
-          "Sid": "AllowReadForCustomerProfileObjectTemplates",
-          "Effect": "Allow",
-          "Action": [
-            "profile:ListProfileObjectTypeTemplates",
-            "profile:GetProfileObjectTypeTemplate"
-          ],
-          "Resource": "arn:aws:profile:*:*:/templates*"
+          "Resource": "arn:aws:profile:*:*:domains/*"
         },
         {
           "Sid": "AllowAppIntegrationsForConnectEnabledTaggedResources",
@@ -74642,32 +74929,15 @@
           "Resource": "*"
         },
         {
-          "Sid": "AllowCustomerProfilesCalculatedAttributesForConnectDomain",
+          "Sid": "AllowKMSListRetirableGrants",
           "Effect": "Allow",
-          "Action": [
-            "profile:GetCalculatedAttributeForProfile",
-            "profile:CreateCalculatedAttributeDefinition",
-            "profile:DeleteCalculatedAttributeDefinition",
-            "profile:GetCalculatedAttributeDefinition",
-            "profile:UpdateCalculatedAttributeDefinition"
-          ],
-          "Resource": [
-            "arn:aws:profile:*:*:domains/amazon-connect-*/calculated-attributes/*"
-          ]
-        },
-        {
-          "Sid": "AllowCustomerProfilesSegmentationForConnectDomain",
-          "Effect": "Allow",
-          "Action": [
-            "profile:CreateSegmentDefinition",
-            "profile:GetSegmentDefinition",
-            "profile:DeleteSegmentDefinition",
-            "profile:CreateSegmentSnapshot",
-            "profile:GetSegmentSnapshot"
-          ],
-          "Resource": [
-            "arn:aws:profile:*:*:domains/amazon-connect-*/segment-definitions/*"
-          ]
+          "Action": "kms:ListRetirableGrants",
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
         },
         {
           "Sid": "AllowPutMetricsForConnectNamespace",
@@ -74707,16 +74977,6 @@
               "aws:ResourceTag/AmazonConnectEnabled": "True"
             }
           }
-        },
-        {
-          "Sid": "AllowWritePermissionForCustomerProfileObjects",
-          "Effect": "Allow",
-          "Action": [
-            "profile:PutProfileObject"
-          ],
-          "Resource": [
-            "arn:aws:profile:*:*:domains/amazon-connect-*/object-types/*"
-          ]
         },
         {
           "Sid": "AllowChimeSDKVoiceConnectorGetOperationForConnect",
@@ -74870,9 +75130,9 @@
         }
       ]
     },
-    "VersionId": "v54",
+    "VersionId": "v55",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-05-18T21:12:24+00:00"
+    "CreateDate": "2026-05-27T21:57:16+00:00"
   },
   "AmazonConnectSynchronizationServiceRolePolicy": {
     "Document": {
@@ -81704,6 +81964,20 @@
           }
         },
         {
+          "Sid": "AttachDetachVolumesToEKSStandardTaggedInstance",
+          "Effect": "Allow",
+          "Action": [
+            "ec2:AttachVolume",
+            "ec2:DetachVolume"
+          ],
+          "Resource": "arn:aws:ec2:*:*:instance/*",
+          "Condition": {
+            "StringEquals": {
+              "ec2:ResourceTag/eks:eks-cluster-name": "${aws:PrincipalTag/eks-cluster-name}"
+            }
+          }
+        },
+        {
           "Sid": "AttachDetachVolumesToManuallyTaggedInstance",
           "Effect": "Allow",
           "Action": [
@@ -81777,9 +82051,9 @@
         }
       ]
     },
-    "VersionId": "v1",
+    "VersionId": "v2",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-04-16T17:27:16+00:00"
+    "CreateDate": "2026-05-28T17:27:10+00:00"
   },
   "AmazonEBSCSIDriverPolicy": {
     "Document": {
@@ -107107,6 +107381,512 @@
     "IsDefaultVersion": true,
     "CreateDate": "2019-12-03T16:19:36+00:00"
   },
+  "AmazonSageMakerModelCustomizationCoreAccess": {
+    "Document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "SageMakerPublicHubPermissions",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:ListHubContents"
+          ],
+          "Resource": [
+            "arn:aws:sagemaker:*:aws:hub/SageMakerPublicHub"
+          ]
+        },
+        {
+          "Sid": "SageMakerHubPermissions",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:ImportHubContent",
+            "sagemaker:ListHubs",
+            "sagemaker:ListHubContents",
+            "sagemaker:ListHubContentVersions",
+            "sagemaker:DescribeHubContent",
+            "sagemaker:DeleteHubContent"
+          ],
+          "Resource": [
+            "arn:aws:sagemaker:*:*:hub/*",
+            "arn:aws:sagemaker:*:*:hub-content/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "JumpStartS3Access",
+          "Effect": "Allow",
+          "Action": [
+            "s3:GetObject",
+            "s3:ListBucket"
+          ],
+          "Resource": [
+            "arn:aws:s3:::jumpstart*"
+          ]
+        },
+        {
+          "Sid": "SageMakerTrainingJob",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:CreateTrainingJob",
+            "sagemaker:DescribeTrainingJob",
+            "sagemaker:ListTrainingJobs",
+            "sagemaker:StopTrainingJob"
+          ],
+          "Resource": [
+            "arn:aws:sagemaker:*:*:training-job/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "SageMakerMLFlow",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:UpdateMlflowApp",
+            "sagemaker:DescribeMlflowApp",
+            "sagemaker:CreatePresignedMlflowAppUrl",
+            "sagemaker:CallMlflowAppApi",
+            "sagemaker-mlflow:AccessUI",
+            "sagemaker-mlflow:GetExperiment",
+            "sagemaker-mlflow:GetExperimentByName",
+            "sagemaker-mlflow:GetRun",
+            "sagemaker-mlflow:GetMetricHistory",
+            "sagemaker-mlflow:GetLoggedModel",
+            "sagemaker-mlflow:SearchExperiments",
+            "sagemaker-mlflow:SearchRuns",
+            "sagemaker-mlflow:ListArtifacts",
+            "sagemaker-mlflow:CreateExperiment",
+            "sagemaker-mlflow:CreateRun",
+            "sagemaker-mlflow:LogBatch",
+            "sagemaker-mlflow:LogMetric",
+            "sagemaker-mlflow:LogParam",
+            "sagemaker-mlflow:LogModel",
+            "sagemaker-mlflow:LogInputs",
+            "sagemaker-mlflow:SetTag",
+            "sagemaker-mlflow:UpdateRun"
+          ],
+          "Resource": [
+            "arn:aws:sagemaker:*:*:mlflow-app/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "BYODataSetS3Access",
+          "Effect": "Allow",
+          "Action": [
+            "s3:ListBucket",
+            "s3:GetObject",
+            "s3:PutObject"
+          ],
+          "Resource": [
+            "arn:aws:s3:::*SageMaker*",
+            "arn:aws:s3:::*Sagemaker*",
+            "arn:aws:s3:::*sagemaker*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "SageMakerModelPackage",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:CreateModel",
+            "sagemaker:CreateModelPackage",
+            "sagemaker:CreateModelPackageGroup",
+            "sagemaker:UpdateModelPackage",
+            "sagemaker:DescribeModelPackage",
+            "sagemaker:DescribeModelPackageGroup",
+            "sagemaker:ListModelPackages",
+            "sagemaker:ListModelPackageGroups",
+            "sagemaker:DescribeModel",
+            "sagemaker:DeleteModelPackage",
+            "sagemaker:DeleteModelPackageGroup"
+          ],
+          "Resource": [
+            "arn:aws:sagemaker:*:*:model-package-group/*",
+            "arn:aws:sagemaker:*:*:model-package/*",
+            "arn:aws:sagemaker:*:*:model/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "SageMakerLineage",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:CreateAction",
+            "sagemaker:CreateArtifact",
+            "sagemaker:CreateContext",
+            "sagemaker:DescribeAction",
+            "sagemaker:DescribeArtifact",
+            "sagemaker:DescribeTrialComponent",
+            "sagemaker:QueryLineage",
+            "sagemaker:AddAssociation",
+            "sagemaker:UpdateArtifact"
+          ],
+          "Resource": [
+            "arn:aws:sagemaker:*:*:action/*",
+            "arn:aws:sagemaker:*:*:artifact/*",
+            "arn:aws:sagemaker:*:*:context/*",
+            "arn:aws:sagemaker:*:*:endpoint/*",
+            "arn:aws:sagemaker:*:*:experiment-trial-component/*",
+            "arn:aws:sagemaker:*:*:model-package/*",
+            "arn:aws:sagemaker:*:*:pipeline/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "SageMakerPipelines",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:CreatePipeline",
+            "sagemaker:DescribePipeline",
+            "sagemaker:DescribePipelineDefinitionForExecution",
+            "sagemaker:DescribePipelineExecution",
+            "sagemaker:UpdatePipeline",
+            "sagemaker:StartPipelineExecution"
+          ],
+          "Resource": [
+            "arn:aws:sagemaker:*:*:pipeline/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "SageMakerInference",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:CreateEndpoint",
+            "sagemaker:CreateEndpointConfig",
+            "sagemaker:CreateInferenceComponent",
+            "sagemaker:DescribeInferenceComponent",
+            "sagemaker:DescribeEndpoint",
+            "sagemaker:DescribeEndpointConfig",
+            "sagemaker:DeleteInferenceComponent",
+            "sagemaker:DeleteEndpoint",
+            "sagemaker:InvokeEndpoint"
+          ],
+          "Resource": [
+            "arn:aws:sagemaker:*:*:inference-component/*",
+            "arn:aws:sagemaker:*:*:endpoint/*",
+            "arn:aws:sagemaker:*:*:endpoint-config/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "SageMakerInferenceAutoscaling",
+          "Effect": "Allow",
+          "Action": [
+            "application-autoscaling:DescribeScalableTargets"
+          ],
+          "Resource": [
+            "arn:aws:application-autoscaling:*:*:scalable-target/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "SageMakerInferenceEcrReadAccess",
+          "Effect": "Allow",
+          "Action": [
+            "ecr:BatchGetImage",
+            "ecr:BatchCheckLayerAvailability",
+            "ecr:GetDownloadUrlForLayer",
+            "ecr:GetAuthorizationToken"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "SageMakerListPermissions",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:ListActions",
+            "sagemaker:ListArtifacts",
+            "sagemaker:ListAssociations",
+            "sagemaker:ListEndpoints",
+            "sagemaker:ListInferenceComponents",
+            "sagemaker:ListMlflowApps",
+            "sagemaker:ListMlflowTrackingServers",
+            "sagemaker:ListPipelineExecutions",
+            "sagemaker:ListPipelineExecutionSteps",
+            "sagemaker:ListWorkforces",
+            "sagemaker:Search"
+          ],
+          "Resource": [
+            "*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "SageMakerTagsPermission",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:AddTags",
+            "sagemaker:ListTags"
+          ],
+          "Resource": [
+            "arn:aws:sagemaker:*:*:model-package-group/*",
+            "arn:aws:sagemaker:*:*:model-package/*",
+            "arn:aws:sagemaker:*:*:hub/*",
+            "arn:aws:sagemaker:*:*:hub-content/*",
+            "arn:aws:sagemaker:*:*:training-job/*",
+            "arn:aws:sagemaker:*:*:model/*",
+            "arn:aws:sagemaker:*:*:endpoint/*",
+            "arn:aws:sagemaker:*:*:endpoint-config/*",
+            "arn:aws:sagemaker:*:*:pipeline/*",
+            "arn:aws:sagemaker:*:*:inference-component/*",
+            "arn:aws:sagemaker:*:*:action/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "SageMakerJobAdvancedSettings",
+          "Effect": "Allow",
+          "Action": [
+            "kms:DescribeKey",
+            "kms:ListAliases",
+            "iam:ListRoles",
+            "ec2:DescribeVpcs"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogReadAccess",
+          "Effect": "Allow",
+          "Action": [
+            "logs:DescribeLogGroups",
+            "logs:DescribeLogStreams",
+            "logs:GetLogEvents"
+          ],
+          "Resource": [
+            "arn:aws:logs:*:*:log-group:/aws/sagemaker/*",
+            "arn:aws:logs:*:*:log-group::log-stream:"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogWriteAccess",
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": [
+            "arn:aws:logs:*:*:log-group:/aws/sagemaker/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "LambdaListFunctions",
+          "Effect": "Allow",
+          "Action": [
+            "lambda:ListFunctions"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "LambdaPermissionsForRewardFunction",
+          "Effect": "Allow",
+          "Action": [
+            "lambda:CreateFunction",
+            "lambda:DeleteFunction",
+            "lambda:InvokeFunction",
+            "lambda:GetFunction"
+          ],
+          "Resource": [
+            "arn:aws:lambda:*:*:function:*SageMaker*",
+            "arn:aws:lambda:*:*:function:*sagemaker*",
+            "arn:aws:lambda:*:*:function:*Sagemaker*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "LambdaLayerForAWSSDK",
+          "Effect": "Allow",
+          "Action": [
+            "lambda:GetLayerVersion"
+          ],
+          "Resource": [
+            "arn:aws:lambda:*:336392948345:layer:AWSSDK*"
+          ]
+        },
+        {
+          "Sid": "BedrockCustomModelAndEvaluation",
+          "Effect": "Allow",
+          "Action": [
+            "bedrock:CreateCustomModel",
+            "bedrock:CreateEvaluationJob",
+            "bedrock:GetCustomModel",
+            "bedrock:GetModelImportJob",
+            "bedrock:GetImportedModel",
+            "bedrock:GetEvaluationJob",
+            "bedrock:InvokeModel",
+            "bedrock:InvokeModelWithResponseStream"
+          ],
+          "Resource": [
+            "arn:aws:bedrock:*:*:evaluation-job/*",
+            "arn:aws:bedrock:*:*:imported-model/*",
+            "arn:aws:bedrock:*:*:custom-model/*",
+            "arn:aws:bedrock:*:*:model-import-job/*",
+            "arn:aws:bedrock:*:*:foundation-model/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "BedrockModelImportAndList",
+          "Effect": "Allow",
+          "Action": [
+            "bedrock:CreateModelImportJob",
+            "bedrock:ListProvisionedModelThroughputs",
+            "bedrock:ListCustomModelDeployments",
+            "bedrock:ListCustomModels",
+            "bedrock:ListModelImportJobs"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "BedrockFoundationModelOperations",
+          "Effect": "Allow",
+          "Action": [
+            "bedrock:GetFoundationModelAvailability",
+            "bedrock:ListFoundationModels"
+          ],
+          "Resource": [
+            "*"
+          ]
+        },
+        {
+          "Sid": "PassRoleForSageMaker",
+          "Effect": "Allow",
+          "Action": [
+            "iam:PassRole"
+          ],
+          "Resource": [
+            "arn:aws:iam::*:role/service-role/*SageMaker*",
+            "arn:aws:iam::*:role/service-role/*Sagemaker*",
+            "arn:aws:iam::*:role/service-role/*sagemaker*"
+          ],
+          "Condition": {
+            "ArnLike": {
+              "iam:AssociatedResourceArn": "arn:aws:sagemaker:*:*:*"
+            },
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}",
+              "iam:PassedToService": [
+                "sagemaker.amazonaws.com",
+                "job.sagemaker.amazonaws.com"
+              ]
+            }
+          }
+        },
+        {
+          "Sid": "PassRoleForAWSLambda",
+          "Effect": "Allow",
+          "Action": [
+            "iam:PassRole"
+          ],
+          "Resource": "arn:aws:iam::*:role/SageMakerForLambda*",
+          "Condition": {
+            "ArnLike": {
+              "iam:AssociatedResourceArn": "arn:aws:lambda:*:*:function:*"
+            },
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}",
+              "iam:PassedToService": "lambda.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Sid": "PassRoleForBedrock",
+          "Effect": "Allow",
+          "Action": [
+            "iam:PassRole"
+          ],
+          "Resource": "arn:aws:iam::*:role/SageMakerForBedrock*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}",
+              "iam:PassedToService": "bedrock.amazonaws.com"
+            }
+          }
+        }
+      ]
+    },
+    "VersionId": "v1",
+    "IsDefaultVersion": true,
+    "CreateDate": "2026-05-26T18:57:29+00:00"
+  },
   "AmazonSageMakerModelGovernanceUseAccess": {
     "Document": {
       "Version": "2012-10-17",
@@ -119387,12 +120167,64 @@
             "ec2:DescribeRouteTables"
           ],
           "Resource": "*"
+        },
+        {
+          "Sid": "ElastiCacheAccess",
+          "Effect": "Allow",
+          "Action": [
+            "elasticache:DescribeCacheClusters",
+            "elasticache:DescribeServerlessCaches"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "MemoryDBAccess",
+          "Effect": "Allow",
+          "Action": [
+            "memorydb:DescribeClusters"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "DocumentDBAccess",
+          "Effect": "Allow",
+          "Action": [
+            "rds:DescribeDBClusters"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "DynamoDBAccess",
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:ListTables",
+            "dynamodb:DescribeTable"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "WorkSpacesAccess",
+          "Effect": "Allow",
+          "Action": [
+            "workspaces:DescribeWorkspaces",
+            "workspaces:DescribeWorkspacesConnectionStatus"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "SageMakerAccess",
+          "Effect": "Allow",
+          "Action": [
+            "sagemaker:ListEndpoints",
+            "sagemaker:DescribeEndpoint"
+          ],
+          "Resource": "*"
         }
       ]
     },
-    "VersionId": "v9",
+    "VersionId": "v10",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-02-12T17:59:19+00:00"
+    "CreateDate": "2026-05-27T17:42:11+00:00"
   },
   "ConfigConformsServiceRolePolicy": {
     "Document": {
@@ -145484,7 +146316,8 @@
           "Effect": "Allow",
           "Action": [
             "dynamodb:ListTables",
-            "glue:ManagedConnector"
+            "glue:ManagedConnector",
+            "glue:TestConnection"
           ],
           "Resource": "*"
         },
@@ -145854,9 +146687,9 @@
         }
       ]
     },
-    "VersionId": "v67",
+    "VersionId": "v68",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-05-11T20:42:10+00:00"
+    "CreateDate": "2026-05-28T16:27:24+00:00"
   },
   "SageMakerStudioQueryExecutionRolePolicy": {
     "Document": {
@@ -146059,7 +146892,8 @@
             "datazone:StartConversation",
             "datazone:GenerateCode",
             "datazone:SendMessage",
-            "datazone:CancelMessage"
+            "datazone:CancelMessage",
+            "datazone:QueryGraph"
           ],
           "Resource": "*"
         },
@@ -146932,9 +147766,9 @@
         }
       ]
     },
-    "VersionId": "v24",
+    "VersionId": "v25",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-05-11T20:42:23+00:00"
+    "CreateDate": "2026-05-26T17:27:26+00:00"
   },
   "SageMakerStudioUserIAMPermissiveExecutionPolicy": {
     "Document": {
@@ -146969,7 +147803,8 @@
             "scheduler:*",
             "sqlworkbench:*",
             "emr-serverless:*",
-            "airflow-serverless:*"
+            "airflow-serverless:*",
+            "airflow:*"
           ],
           "Resource": "*"
         },
@@ -147067,9 +147902,7 @@
             "datazone:UpdateEnvironment",
             "datazone:UpdateProject",
             "datazone:UpdateSubscriptionRequest",
-            "datazone:CreateNotebook",
-            "datazone:UpdateNotebook",
-            "datazone:DeleteNotebook",
+            "datazone:*Notebook*",
             "datazone:CreateCell",
             "datazone:UpdateCell",
             "datazone:DeleteCell",
@@ -147079,13 +147912,11 @@
             "datazone:DeleteCellRun",
             "datazone:BatchGetCellRun",
             "datazone:PutCellRunResult",
-            "datazone:StartNotebookCompute",
-            "datazone:StopNotebookCompute",
             "datazone:StartConversation",
             "datazone:GenerateCode",
             "datazone:SendMessage",
-            "datazone:StartNotebookImport",
-            "datazone:StartNotebookExport"
+            "datazone:CancelMessage",
+            "datazone:QueryGraph"
           ],
           "Resource": "*"
         },
@@ -147229,7 +148060,8 @@
             "secretsmanager:DescribeSecret",
             "secretsmanager:GetSecretValue",
             "secretsmanager:UpdateSecret",
-            "secretsmanager:PutResourcePolicy"
+            "secretsmanager:PutResourcePolicy",
+            "secretsmanager:PutSecretValue"
           ],
           "Resource": "*",
           "Condition": {
@@ -147245,7 +148077,8 @@
             "secretsmanager:CreateSecret",
             "secretsmanager:DescribeSecret",
             "secretsmanager:GetSecretValue",
-            "secretsmanager:UpdateSecret"
+            "secretsmanager:UpdateSecret",
+            "secretsmanager:PutSecretValue"
           ],
           "Resource": "*",
           "Condition": {
@@ -147531,9 +148364,9 @@
         }
       ]
     },
-    "VersionId": "v18",
+    "VersionId": "v20",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-05-11T21:42:12+00:00"
+    "CreateDate": "2026-05-29T20:27:23+00:00"
   },
   "SecretsManagerReadWrite": {
     "Document": {

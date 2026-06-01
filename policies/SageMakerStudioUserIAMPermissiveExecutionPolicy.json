@@ -31,7 +31,8 @@
           "scheduler:*",
           "sqlworkbench:*",
           "emr-serverless:*",
-          "airflow-serverless:*"
+          "airflow-serverless:*",
+          "airflow:*"
         ],
         "Resource": "*"
       },
@@ -129,9 +130,7 @@
           "datazone:UpdateEnvironment",
           "datazone:UpdateProject",
           "datazone:UpdateSubscriptionRequest",
-          "datazone:CreateNotebook",
-          "datazone:UpdateNotebook",
-          "datazone:DeleteNotebook",
+          "datazone:*Notebook*",
           "datazone:CreateCell",
           "datazone:UpdateCell",
           "datazone:DeleteCell",
@@ -141,13 +140,11 @@
           "datazone:DeleteCellRun",
           "datazone:BatchGetCellRun",
           "datazone:PutCellRunResult",
-          "datazone:StartNotebookCompute",
-          "datazone:StopNotebookCompute",
           "datazone:StartConversation",
           "datazone:GenerateCode",
           "datazone:SendMessage",
-          "datazone:StartNotebookImport",
-          "datazone:StartNotebookExport"
+          "datazone:CancelMessage",
+          "datazone:QueryGraph"
         ],
         "Resource": "*"
       },
@@ -291,7 +288,8 @@
           "secretsmanager:DescribeSecret",
           "secretsmanager:GetSecretValue",
           "secretsmanager:UpdateSecret",
-          "secretsmanager:PutResourcePolicy"
+          "secretsmanager:PutResourcePolicy",
+          "secretsmanager:PutSecretValue"
         ],
         "Resource": "*",
         "Condition": {
@@ -307,7 +305,8 @@
           "secretsmanager:CreateSecret",
           "secretsmanager:DescribeSecret",
           "secretsmanager:GetSecretValue",
-          "secretsmanager:UpdateSecret"
+          "secretsmanager:UpdateSecret",
+          "secretsmanager:PutSecretValue"
         ],
         "Resource": "*",
         "Condition": {
@@ -593,7 +592,7 @@
       }
     ]
   },
-  "VersionId": "v18",
+  "VersionId": "v20",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-05-11T21:42:12+00:00"
+  "CreateDate": "2026-05-29T20:27:23+00:00"
 }
