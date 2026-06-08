@@ -135,6 +135,7 @@
               "bedrock.amazonaws.com",
               "scheduler.amazonaws.com",
               "emr-serverless.amazonaws.com",
+              "elasticmapreduce.amazonaws.com",
               "redshift.amazonaws.com",
               "airflow-serverless.amazonaws.com"
             ]
@@ -370,11 +371,13 @@
           "athena:TerminateSession",
           "emr-serverless:*Session*",
           "emr-serverless:*Dashboard*",
+          "elasticmapreduce:*Session*",
           "glue:CancelStatement",
           "glue:CreateSession",
           "glue:DeleteSession",
           "glue:GetDashboardUrl",
           "glue:GetSession",
+          "glue:GetSessionEndpoint",
           "glue:GetStatement",
           "glue:RunStatement",
           "glue:StopSession"
@@ -382,6 +385,7 @@
         "Resource": [
           "arn:aws:athena:*:*:workgroup/*/session/*",
           "arn:aws:emr-serverless:*:*:/applications/*/sessions/*",
+          "arn:aws:elasticmapreduce:*:*:cluster/*/session/*",
           "arn:aws:glue:*:*:session/*"
         ],
         "Condition": {
@@ -398,12 +402,15 @@
           "athena:TagResource",
           "athena:UntagResource",
           "emr-serverless:*Resource",
+          "elasticmapreduce:AddTags",
+          "elasticmapreduce:RemoveTags",
           "glue:TagResource",
           "glue:UntagResource"
         ],
         "Resource": [
           "arn:aws:athena:*:*:workgroup/*/session/*",
           "arn:aws:emr-serverless:*:*:/applications/*/sessions/*",
+          "arn:aws:elasticmapreduce:*:*:cluster/*/session/*",
           "arn:aws:glue:*:*:session/*"
         ],
         "Condition": {
@@ -865,6 +872,7 @@
           "ForAllValues:StringLike": {
             "aws:TagKeys": [
               "AmazonDataZone*",
+              "for-use-with-amazon-emr-managed-policies",
               "aws:cloudformation:*"
             ]
           }
@@ -893,7 +901,7 @@
         ]
       },
       {
-        "Sid": "EMRServerless",
+        "Sid": "EMR",
         "Effect": "Allow",
         "Action": [
           "emr-serverless:Get*",
@@ -901,7 +909,14 @@
           "emr-serverless:Start*",
           "emr-serverless:Access*",
           "emr-serverless:Terminate*",
-          "emr-serverless:*Resource"
+          "emr-serverless:*Resource",
+          "elasticmapreduce:*PersistentAppUI*",
+          "elasticmapreduce:Start*",
+          "elasticmapreduce:Get*",
+          "elasticmapreduce:Describe*",
+          "elasticmapreduce:List*",
+          "elasticmapreduce:Terminate*",
+          "elasticmapreduce:*Tag*"
         ],
         "Resource": "*"
       },
@@ -1023,7 +1038,7 @@
       }
     ]
   },
-  "VersionId": "v21",
+  "VersionId": "v22",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-05-11T20:42:19+00:00"
+  "CreateDate": "2026-06-04T21:27:17+00:00"
 }
