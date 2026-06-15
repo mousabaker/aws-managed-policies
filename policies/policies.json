@@ -881,6 +881,7 @@
           "Action": [
             "aidevops:AllowVendedLogDeliveryForResource",
             "aidevops:AssociateService",
+            "aidevops:CreateAccessToken",
             "aidevops:CreateAgentSpace",
             "aidevops:CreateAsset",
             "aidevops:CreateAssetFile",
@@ -889,11 +890,13 @@
             "aidevops:CreateKnowledgeItem",
             "aidevops:CreateOneTimeLoginSession",
             "aidevops:CreatePrivateConnection",
+            "aidevops:CreateTrigger",
             "aidevops:DeleteAgentSpace",
             "aidevops:DeleteAsset",
             "aidevops:DeleteAssetFile",
             "aidevops:DeleteKnowledgeItem",
             "aidevops:DeletePrivateConnection",
+            "aidevops:DeleteTrigger",
             "aidevops:DeregisterService",
             "aidevops:DescribePrivateConnection",
             "aidevops:DescribeServices",
@@ -903,6 +906,7 @@
             "aidevops:DiscoverTopology",
             "aidevops:EnableOperatorApp",
             "aidevops:EndChatForCase",
+            "aidevops:GetAccessToken",
             "aidevops:GetAccountUsage",
             "aidevops:GetAgentSpace",
             "aidevops:GetAsset",
@@ -914,7 +918,9 @@
             "aidevops:GetOperatorApp",
             "aidevops:GetRecommendation",
             "aidevops:GetService",
+            "aidevops:GetTrigger",
             "aidevops:InitiateChatForCase",
+            "aidevops:ListAccessTokens",
             "aidevops:ListAgentSpaces",
             "aidevops:ListAssetFiles",
             "aidevops:ListAssets",
@@ -933,8 +939,11 @@
             "aidevops:ListRecommendations",
             "aidevops:ListServices",
             "aidevops:ListTagsForResource",
+            "aidevops:ListTriggers",
             "aidevops:ListWebhooks",
             "aidevops:RegisterService",
+            "aidevops:RevokeAccessToken",
+            "aidevops:RotateAccessToken",
             "aidevops:SearchServiceAccessibleResource",
             "aidevops:SendMessage",
             "aidevops:TagResource",
@@ -949,15 +958,16 @@
             "aidevops:UpdateOperatorAppIdpConfig",
             "aidevops:UpdatePrivateConnectionCertificate",
             "aidevops:UpdateRecommendation",
+            "aidevops:UpdateTrigger",
             "aidevops:ValidateAwsAssociations"
           ],
           "Resource": "*"
         }
       ]
     },
-    "VersionId": "v3",
+    "VersionId": "v5",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-06-06T02:27:20+00:00"
+    "CreateDate": "2026-06-12T23:27:07+00:00"
   },
   "AIDevOpsAgentReadOnlyAccess": {
     "Document": {
@@ -967,6 +977,8 @@
           "Sid": "AIDevOpsAgentReadOnlyAccess",
           "Effect": "Allow",
           "Action": [
+            "aidevops:DescribePrivateConnection",
+            "aidevops:DescribeServices",
             "aidevops:Get*",
             "aidevops:List*",
             "aidevops:SearchServiceAccessibleResource"
@@ -975,9 +987,9 @@
         }
       ]
     },
-    "VersionId": "v1",
+    "VersionId": "v2",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-03-26T03:42:07+00:00"
+    "CreateDate": "2026-06-11T00:57:11+00:00"
   },
   "AIDevOpsOperatorAppAccessPolicy": {
     "Document": {
@@ -987,18 +999,22 @@
           "Sid": "AllowOperatorAgentSpaceActions",
           "Effect": "Allow",
           "Action": [
+            "aidevops:CreateAccessToken",
             "aidevops:CreateAsset",
             "aidevops:CreateAssetFile",
             "aidevops:CreateBacklogTask",
             "aidevops:CreateChat",
             "aidevops:CreateKnowledgeItem",
+            "aidevops:CreateTrigger",
             "aidevops:DeleteAsset",
             "aidevops:DeleteAssetFile",
             "aidevops:DeleteKnowledgeItem",
+            "aidevops:DeleteTrigger",
             "aidevops:DescribeServices",
             "aidevops:DescribeSupportLevel",
             "aidevops:DiscoverTopology",
             "aidevops:EndChatForCase",
+            "aidevops:GetAccessToken",
             "aidevops:GetAgentSpace",
             "aidevops:GetAsset",
             "aidevops:GetAssetContent",
@@ -1007,7 +1023,9 @@
             "aidevops:GetBacklogTask",
             "aidevops:GetKnowledgeItem",
             "aidevops:GetRecommendation",
+            "aidevops:GetTrigger",
             "aidevops:InitiateChatForCase",
+            "aidevops:ListAccessTokens",
             "aidevops:ListAssetFiles",
             "aidevops:ListAssets",
             "aidevops:ListAssetTypes",
@@ -1022,13 +1040,17 @@
             "aidevops:ListKnowledgeItemVersions",
             "aidevops:ListPendingMessages",
             "aidevops:ListRecommendations",
+            "aidevops:ListTriggers",
+            "aidevops:RevokeAccessToken",
+            "aidevops:RotateAccessToken",
             "aidevops:SendMessage",
             "aidevops:UpdateAsset",
             "aidevops:UpdateAssetFile",
             "aidevops:UpdateBacklogTask",
             "aidevops:UpdateGoal",
             "aidevops:UpdateKnowledgeItem",
-            "aidevops:UpdateRecommendation"
+            "aidevops:UpdateRecommendation",
+            "aidevops:UpdateTrigger"
           ],
           "Resource": "arn:aws:aidevops:*:*:agentspace/${aws:PrincipalTag/AgentSpaceId}",
           "Condition": {
@@ -1095,9 +1117,9 @@
         }
       ]
     },
-    "VersionId": "v6",
+    "VersionId": "v8",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-06-06T02:27:16+00:00"
+    "CreateDate": "2026-06-12T23:27:27+00:00"
   },
   "AIOpsAssistantIncidentReportPolicy": {
     "Document": {
@@ -5865,13 +5887,13 @@
             "arn:aws:ec2:*:*:subnet/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -5951,8 +5973,8 @@
           "Resource": "arn:aws:cloudformation:*:*:stack/Nmd*",
           "Condition": {
             "StringEquals": {
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService",
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService",
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6086,13 +6108,13 @@
             "arn:aws:ec2:*:*:security-group-rule/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6144,13 +6166,13 @@
             "arn:aws:ec2:*:*:elastic-ip/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "ec2:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "ec2:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6167,13 +6189,13 @@
             "arn:aws:ec2:*:*:transit-gateway-attachment/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:ResourceOrgID": "${aws:PrincipalOrgID}"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:ResourceOrgID": "${aws:PrincipalOrgID}"
             }
           }
         },
@@ -6211,13 +6233,13 @@
             "arn:aws:ec2:*:*:vpc/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6233,13 +6255,13 @@
             "arn:aws:ec2:*:*:route-table/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6255,13 +6277,13 @@
             "arn:aws:ec2:*:*:elastic-ip/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6277,13 +6299,13 @@
             "arn:aws:ec2:*:*:transit-gateway-route-table/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6300,13 +6322,13 @@
             "arn:aws:ec2:*:*:subnet/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6350,13 +6372,13 @@
             "arn:aws:ec2:*:*:network-insights-path/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6444,14 +6466,14 @@
             "arn:aws:ssm:*:*:parameter/network-migration/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService",
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService",
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6469,13 +6491,13 @@
             "arn:aws:ssm:*:*:parameter/network-migration/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6487,14 +6509,14 @@
           ],
           "Resource": "arn:aws:ram:*:*:resource-share/*",
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService",
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService",
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6506,16 +6528,16 @@
           ],
           "Resource": "arn:aws:ram:*:*:resource-share/*",
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
+            "Bool": {
+              "ram:RequestedAllowsExternalPrincipals": "false"
             },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
             },
-            "Bool": {
-              "ram:RequestedAllowsExternalPrincipals": "false"
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6527,16 +6549,16 @@
           ],
           "Resource": "arn:aws:ram:*:*:resource-share/*",
           "Condition": {
+            "ForAnyValue:StringEquals": {
+              "aws:CalledVia": [
+                "cloudformation.amazonaws.com"
+              ]
+            },
             "StringEquals": {
               "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService",
               "ram:RequestedResourceType": [
                 "ec2:TransitGateway",
                 "ssm:Parameter"
-              ]
-            },
-            "ForAnyValue:StringEquals": {
-              "aws:CalledVia": [
-                "cloudformation.amazonaws.com"
               ]
             }
           }
@@ -6551,13 +6573,13 @@
           ],
           "Resource": "arn:aws:ram:*:*:resource-share/*",
           "Condition": {
-            "StringEquals": {
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6599,14 +6621,14 @@
             "arn:aws:lambda:*:*:function:network-migration*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService",
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService",
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6614,7 +6636,8 @@
           "Sid": "GetCustomResource",
           "Effect": "Allow",
           "Action": [
-            "lambda:GetFunction"
+            "lambda:GetFunction",
+            "lambda:ListTags"
           ],
           "Resource": [
             "arn:aws:lambda:*:*:function:network-migration*"
@@ -6640,13 +6663,13 @@
             "arn:aws:lambda:*:*:function:network-migration*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6659,14 +6682,14 @@
           ],
           "Resource": "arn:aws:iam::*:role/Nmd*modifyTransitGateway*",
           "Condition": {
-            "StringEquals": {
-              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService",
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:RequestTag/CreatedBy": "AWSApplicationMigrationService",
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6716,13 +6739,13 @@
           ],
           "Resource": "arn:aws:iam::*:role/Nmd*modifyTransitGateway*",
           "Condition": {
-            "StringEquals": {
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6734,9 +6757,6 @@
           ],
           "Resource": "arn:aws:iam::*:role/Nmd*modifyTransitGateway*",
           "Condition": {
-            "StringEquals": {
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ArnEquals": {
               "iam:PolicyARN": [
                 "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -6747,6 +6767,9 @@
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6835,13 +6858,13 @@
             "arn:aws:ec2:*:*:security-group-rule/*"
           ],
           "Condition": {
-            "StringEquals": {
-              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
-            },
             "ForAnyValue:StringEquals": {
               "aws:CalledVia": [
                 "cloudformation.amazonaws.com"
               ]
+            },
+            "StringEquals": {
+              "aws:ResourceTag/CreatedBy": "AWSApplicationMigrationService"
             }
           }
         },
@@ -6863,9 +6886,9 @@
         }
       ]
     },
-    "VersionId": "v3",
+    "VersionId": "v4",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-02-12T17:58:43+00:00"
+    "CreateDate": "2026-06-11T07:42:18+00:00"
   },
   "AWSApplicationMigrationReadOnlyAccess": {
     "Document": {
@@ -34895,12 +34918,27 @@
               "ec2:Owner": "amazon"
             }
           }
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup"
+          ],
+          "Resource": "arn:aws:logs:*:*:log-group:*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "arn:aws:logs:*:*:log-group:*:log-stream:*"
         }
       ]
     },
-    "VersionId": "v4",
+    "VersionId": "v5",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-04-23T20:42:16+00:00"
+    "CreateDate": "2026-06-10T20:27:31+00:00"
   },
   "AWSLambdaReplicator": {
     "Document": {
@@ -53245,6 +53283,89 @@
     "IsDefaultVersion": true,
     "CreateDate": "2026-06-02T20:42:11+00:00"
   },
+  "AWSSecurityAgentServiceRolePolicy": {
+    "Document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "LatticeCreateResourceGateway",
+          "Effect": "Allow",
+          "Action": [
+            "vpc-lattice:CreateResourceGateway"
+          ],
+          "Resource": "arn:aws:vpc-lattice:*:*:resourcegateway/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:RequestTag/AWSSecurityAgentManaged": "true"
+            }
+          }
+        },
+        {
+          "Sid": "LatticeTagResourceGateway",
+          "Effect": "Allow",
+          "Action": [
+            "vpc-lattice:TagResource"
+          ],
+          "Resource": "arn:aws:vpc-lattice:*:*:resourcegateway/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:RequestTag/AWSSecurityAgentManaged": "true"
+            }
+          }
+        },
+        {
+          "Sid": "LatticeManageTaggedResourceGateways",
+          "Effect": "Allow",
+          "Action": [
+            "vpc-lattice:DeleteResourceGateway"
+          ],
+          "Resource": "arn:aws:vpc-lattice:*:*:resourcegateway/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceTag/AWSSecurityAgentManaged": "true"
+            }
+          }
+        },
+        {
+          "Sid": "LatticeGetResourceGateway",
+          "Effect": "Allow",
+          "Action": [
+            "vpc-lattice:GetResourceGateway"
+          ],
+          "Resource": "arn:aws:vpc-lattice:*:*:resourcegateway/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceTag/AWSSecurityAgentManaged": "true"
+            }
+          }
+        },
+        {
+          "Sid": "DescribeApis",
+          "Effect": "Allow",
+          "Action": [
+            "ec2:DescribeVpcs",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeSecurityGroups"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "CreateLatticeServiceLinkedRole",
+          "Effect": "Allow",
+          "Action": "iam:CreateServiceLinkedRole",
+          "Resource": "arn:aws:iam::*:role/aws-service-role/vpc-lattice.amazonaws.com/AWSServiceRoleForVpcLattice",
+          "Condition": {
+            "StringLike": {
+              "iam:AWSServiceName": "vpc-lattice.amazonaws.com"
+            }
+          }
+        }
+      ]
+    },
+    "VersionId": "v1",
+    "IsDefaultVersion": true,
+    "CreateDate": "2026-06-11T23:42:19+00:00"
+  },
   "AWSSecurityAgentWebAppPolicy": {
     "Document": {
       "Version": "2012-10-17",
@@ -53270,48 +53391,63 @@
           "Effect": "Allow",
           "Action": [
             "securityagent:AddArtifact",
-            "securityagent:BatchDeletePentests",
+            "securityagent:CreateThreat",
             "securityagent:BatchDeleteCodeReviews",
+            "securityagent:BatchDeletePentests",
+            "securityagent:BatchDeleteThreatModels",
             "securityagent:BatchGetAgentSpaces",
             "securityagent:BatchGetArtifactMetadata",
-            "securityagent:BatchGetFindings",
-            "securityagent:BatchGetPentestJobs",
             "securityagent:BatchGetCodeReviewJobs",
-            "securityagent:BatchGetPentests",
-            "securityagent:BatchGetCodeReviews",
-            "securityagent:BatchGetPentestJobContentMetadata",
-            "securityagent:BatchGetPentestJobTasks",
             "securityagent:BatchGetCodeReviewJobTasks",
+            "securityagent:BatchGetCodeReviews",
+            "securityagent:BatchGetFindings",
+            "securityagent:BatchGetPentestJobContentMetadata",
+            "securityagent:BatchGetPentestJobs",
+            "securityagent:BatchGetPentestJobTasks",
+            "securityagent:BatchGetPentests",
+            "securityagent:BatchGetThreatModelJobs",
+            "securityagent:BatchGetThreatModelJobTasks",
+            "securityagent:BatchGetThreatModels",
+            "securityagent:BatchGetThreats",
+            "securityagent:CreateCodeReview",
             "securityagent:CreateDesignReview",
             "securityagent:CreatePentest",
-            "securityagent:CreateCodeReview",
+            "securityagent:CreateThreatModel",
             "securityagent:DeleteArtifact",
-            "securityagent:GetArtifact",
             "securityagent:DeleteDesignReview",
+            "securityagent:GetArtifact",
             "securityagent:GetDesignReview",
             "securityagent:GetDesignReviewArtifact",
+            "securityagent:GetDesignReviewFeedback",
             "securityagent:ListArtifacts",
-            "securityagent:ListDiscoveredEndpoints",
+            "securityagent:ListCodeReviewJobsForCodeReview",
+            "securityagent:ListCodeReviewJobTasks",
+            "securityagent:ListCodeReviews",
             "securityagent:ListDesignReviewComments",
             "securityagent:ListDesignReviews",
+            "securityagent:ListDiscoveredEndpoints",
             "securityagent:ListFindings",
             "securityagent:ListIntegratedResources",
             "securityagent:ListPentestJobsForPentest",
-            "securityagent:ListCodeReviewJobsForCodeReview",
-            "securityagent:ListPentests",
-            "securityagent:ListCodeReviews",
             "securityagent:ListPentestJobTasks",
-            "securityagent:ListCodeReviewJobTasks",
+            "securityagent:ListPentests",
+            "securityagent:ListThreatModelJobs",
+            "securityagent:ListThreatModelJobTasks",
+            "securityagent:ListThreatModels",
+            "securityagent:ListThreats",
+            "securityagent:PutDesignReviewFeedback",
             "securityagent:StartCodeRemediation",
-            "securityagent:StartPentestJob",
             "securityagent:StartCodeReviewJob",
-            "securityagent:StopPentestJob",
+            "securityagent:StartPentestJob",
+            "securityagent:StartThreatModelJob",
             "securityagent:StopCodeReviewJob",
+            "securityagent:StopPentestJob",
+            "securityagent:StopThreatModelJob",
+            "securityagent:UpdateCodeReview",
             "securityagent:UpdateFinding",
             "securityagent:UpdatePentest",
-            "securityagent:UpdateCodeReview",
-            "securityagent:GetDesignReviewFeedback",
-            "securityagent:PutDesignReviewFeedback"
+            "securityagent:UpdateThreat",
+            "securityagent:UpdateThreatModel"
           ],
           "Resource": "arn:aws:securityagent:*:*:agent-space*",
           "Condition": {
@@ -53322,9 +53458,9 @@
         }
       ]
     },
-    "VersionId": "v5",
+    "VersionId": "v6",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-05-08T17:57:21+00:00"
+    "CreateDate": "2026-06-11T18:27:14+00:00"
   },
   "AWSSecurityHubFullAccess": {
     "Document": {
@@ -114056,6 +114192,7 @@
             "aws-external-anthropic:CreateSkill",
             "aws-external-anthropic:CreateUserProfile",
             "aws-external-anthropic:CreateVault",
+            "aws-external-anthropic:CreateWebhook",
             "aws-external-anthropic:DeleteBatchInference",
             "aws-external-anthropic:DeleteEnvironment",
             "aws-external-anthropic:DeleteFile",
@@ -114063,13 +114200,17 @@
             "aws-external-anthropic:DeleteSession",
             "aws-external-anthropic:DeleteSkill",
             "aws-external-anthropic:DeleteVault",
+            "aws-external-anthropic:DeleteWebhook",
+            "aws-external-anthropic:ProcessEnvironmentWork",
+            "aws-external-anthropic:RotateWebhookSecret",
             "aws-external-anthropic:UpdateAgent",
             "aws-external-anthropic:UpdateEnvironment",
             "aws-external-anthropic:UpdateMemoryStore",
             "aws-external-anthropic:UpdateSession",
             "aws-external-anthropic:UpdateSkill",
             "aws-external-anthropic:UpdateUserProfile",
-            "aws-external-anthropic:UpdateVault"
+            "aws-external-anthropic:UpdateVault",
+            "aws-external-anthropic:UpdateWebhook"
           ],
           "Resource": "arn:aws:aws-external-anthropic:*:*:workspace/*"
         },
@@ -114118,9 +114259,9 @@
         }
       ]
     },
-    "VersionId": "v5",
+    "VersionId": "v6",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-05-08T22:27:10+00:00"
+    "CreateDate": "2026-06-12T16:57:32+00:00"
   },
   "AnthropicReadOnlyAccess": {
     "Document": {
@@ -114172,6 +114313,36 @@
     "VersionId": "v2",
     "IsDefaultVersion": true,
     "CreateDate": "2026-04-01T22:42:18+00:00"
+  },
+  "AnthropicSelfHostedEnvironmentAccess": {
+    "Document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AnthropicSelfHostedEnvironmentWorkspace",
+          "Effect": "Allow",
+          "Action": [
+            "aws-external-anthropic:GetEnvironment",
+            "aws-external-anthropic:GetSession",
+            "aws-external-anthropic:GetSkill",
+            "aws-external-anthropic:ProcessEnvironmentWork",
+            "aws-external-anthropic:UpdateSession"
+          ],
+          "Resource": "arn:aws:aws-external-anthropic:*:*:workspace/*"
+        },
+        {
+          "Sid": "AnthropicSelfHostedEnvironmentResourceless",
+          "Effect": "Allow",
+          "Action": [
+            "aws-external-anthropic:CallWithBearerToken"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "VersionId": "v1",
+    "IsDefaultVersion": true,
+    "CreateDate": "2026-06-12T17:12:29+00:00"
   },
   "AppIntegrationsServiceLinkedRolePolicy": {
     "Document": {
@@ -118483,12 +118654,40 @@
             "s3tables:PutTableBucketPolicy"
           ],
           "Resource": "arn:aws:s3tables:*:*:bucket/aws-cloudwatch"
+        },
+        {
+          "Sid": "LogAlarmScheduledQueryPassRolePermissions",
+          "Effect": "Allow",
+          "Action": "iam:PassRole",
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "iam:PassedToService": "logs.amazonaws.com"
+            },
+            "ArnLike": {
+              "iam:AssociatedResourceArn": "arn:aws:logs:*:*:scheduled-query:*"
+            }
+          }
+        },
+        {
+          "Sid": "LogAlarmLogLinesPassRolePermissions",
+          "Effect": "Allow",
+          "Action": "iam:PassRole",
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "iam:PassedToService": "cloudwatch.amazonaws.com"
+            },
+            "ArnLike": {
+              "iam:AssociatedResourceArn": "arn:aws:cloudwatch:*:*:alarm:*"
+            }
+          }
         }
       ]
     },
-    "VersionId": "v15",
+    "VersionId": "v16",
     "IsDefaultVersion": true,
-    "CreateDate": "2026-02-12T18:00:06+00:00"
+    "CreateDate": "2026-06-08T13:27:16+00:00"
   },
   "CloudWatchInternetMonitorFullAccess": {
     "Document": {
@@ -130151,6 +130350,25 @@
     "VersionId": "v6",
     "IsDefaultVersion": true,
     "CreateDate": "2026-02-12T17:59:37+00:00"
+  },
+  "ReInventTicketApprovalAccess": {
+    "Document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowBillToAWSActions",
+          "Effect": "Allow",
+          "Action": [
+            "eventsbilltoaws:info",
+            "eventsbilltoaws:approve"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "VersionId": "v1",
+    "IsDefaultVersion": true,
+    "CreateDate": "2026-06-10T18:57:15+00:00"
   },
   "ReadOnlyAccess": {
     "Document": {

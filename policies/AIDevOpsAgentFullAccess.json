@@ -8,6 +8,7 @@
         "Action": [
           "aidevops:AllowVendedLogDeliveryForResource",
           "aidevops:AssociateService",
+          "aidevops:CreateAccessToken",
           "aidevops:CreateAgentSpace",
           "aidevops:CreateAsset",
           "aidevops:CreateAssetFile",
@@ -16,11 +17,13 @@
           "aidevops:CreateKnowledgeItem",
           "aidevops:CreateOneTimeLoginSession",
           "aidevops:CreatePrivateConnection",
+          "aidevops:CreateTrigger",
           "aidevops:DeleteAgentSpace",
           "aidevops:DeleteAsset",
           "aidevops:DeleteAssetFile",
           "aidevops:DeleteKnowledgeItem",
           "aidevops:DeletePrivateConnection",
+          "aidevops:DeleteTrigger",
           "aidevops:DeregisterService",
           "aidevops:DescribePrivateConnection",
           "aidevops:DescribeServices",
@@ -30,6 +33,7 @@
           "aidevops:DiscoverTopology",
           "aidevops:EnableOperatorApp",
           "aidevops:EndChatForCase",
+          "aidevops:GetAccessToken",
           "aidevops:GetAccountUsage",
           "aidevops:GetAgentSpace",
           "aidevops:GetAsset",
@@ -41,7 +45,9 @@
           "aidevops:GetOperatorApp",
           "aidevops:GetRecommendation",
           "aidevops:GetService",
+          "aidevops:GetTrigger",
           "aidevops:InitiateChatForCase",
+          "aidevops:ListAccessTokens",
           "aidevops:ListAgentSpaces",
           "aidevops:ListAssetFiles",
           "aidevops:ListAssets",
@@ -60,8 +66,11 @@
           "aidevops:ListRecommendations",
           "aidevops:ListServices",
           "aidevops:ListTagsForResource",
+          "aidevops:ListTriggers",
           "aidevops:ListWebhooks",
           "aidevops:RegisterService",
+          "aidevops:RevokeAccessToken",
+          "aidevops:RotateAccessToken",
           "aidevops:SearchServiceAccessibleResource",
           "aidevops:SendMessage",
           "aidevops:TagResource",
@@ -76,13 +85,14 @@
           "aidevops:UpdateOperatorAppIdpConfig",
           "aidevops:UpdatePrivateConnectionCertificate",
           "aidevops:UpdateRecommendation",
+          "aidevops:UpdateTrigger",
           "aidevops:ValidateAwsAssociations"
         ],
         "Resource": "*"
       }
     ]
   },
-  "VersionId": "v3",
+  "VersionId": "v5",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-06-06T02:27:20+00:00"
+  "CreateDate": "2026-06-12T23:27:07+00:00"
 }

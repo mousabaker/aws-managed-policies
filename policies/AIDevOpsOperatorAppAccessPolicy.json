@@ -6,18 +6,22 @@
         "Sid": "AllowOperatorAgentSpaceActions",
         "Effect": "Allow",
         "Action": [
+          "aidevops:CreateAccessToken",
           "aidevops:CreateAsset",
           "aidevops:CreateAssetFile",
           "aidevops:CreateBacklogTask",
           "aidevops:CreateChat",
           "aidevops:CreateKnowledgeItem",
+          "aidevops:CreateTrigger",
           "aidevops:DeleteAsset",
           "aidevops:DeleteAssetFile",
           "aidevops:DeleteKnowledgeItem",
+          "aidevops:DeleteTrigger",
           "aidevops:DescribeServices",
           "aidevops:DescribeSupportLevel",
           "aidevops:DiscoverTopology",
           "aidevops:EndChatForCase",
+          "aidevops:GetAccessToken",
           "aidevops:GetAgentSpace",
           "aidevops:GetAsset",
           "aidevops:GetAssetContent",
@@ -26,7 +30,9 @@
           "aidevops:GetBacklogTask",
           "aidevops:GetKnowledgeItem",
           "aidevops:GetRecommendation",
+          "aidevops:GetTrigger",
           "aidevops:InitiateChatForCase",
+          "aidevops:ListAccessTokens",
           "aidevops:ListAssetFiles",
           "aidevops:ListAssets",
           "aidevops:ListAssetTypes",
@@ -41,13 +47,17 @@
           "aidevops:ListKnowledgeItemVersions",
           "aidevops:ListPendingMessages",
           "aidevops:ListRecommendations",
+          "aidevops:ListTriggers",
+          "aidevops:RevokeAccessToken",
+          "aidevops:RotateAccessToken",
           "aidevops:SendMessage",
           "aidevops:UpdateAsset",
           "aidevops:UpdateAssetFile",
           "aidevops:UpdateBacklogTask",
           "aidevops:UpdateGoal",
           "aidevops:UpdateKnowledgeItem",
-          "aidevops:UpdateRecommendation"
+          "aidevops:UpdateRecommendation",
+          "aidevops:UpdateTrigger"
         ],
         "Resource": "arn:aws:aidevops:*:*:agentspace/${aws:PrincipalTag/AgentSpaceId}",
         "Condition": {
@@ -114,7 +124,7 @@
       }
     ]
   },
-  "VersionId": "v6",
+  "VersionId": "v8",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-06-06T02:27:16+00:00"
+  "CreateDate": "2026-06-12T23:27:27+00:00"
 }
