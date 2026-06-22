@@ -5,7 +5,8 @@
       {
         "Effect": "Allow",
         "Action": [
-          "ec2:DeleteNetworkInterface"
+          "ec2:DeleteNetworkInterface",
+          "ec2:AssignIpv6Addresses"
         ],
         "Resource": "*",
         "Condition": {
@@ -29,7 +30,7 @@
       }
     ]
   },
-  "VersionId": "v1",
+  "VersionId": "v2",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-04-27T23:42:19+00:00"
+  "CreateDate": "2026-06-19T17:27:31+00:00"
 }

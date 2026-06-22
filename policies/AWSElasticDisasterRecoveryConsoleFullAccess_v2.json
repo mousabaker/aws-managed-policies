@@ -96,11 +96,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:snapshot/*",
         "Condition": {
-          "Null": {
-            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -142,11 +142,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:volume/*",
         "Condition": {
-          "Null": {
-            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -163,11 +163,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:instance/*",
         "Condition": {
-          "Null": {
-            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -181,11 +181,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:security-group/*",
         "Condition": {
-          "Null": {
-            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -197,11 +197,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:volume/*",
         "Condition": {
-          "Null": {
-            "aws:RequestTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:RequestTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -219,11 +219,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:security-group/*",
         "Condition": {
-          "Null": {
-            "aws:RequestTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:RequestTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -235,11 +235,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:volume/*",
         "Condition": {
-          "Null": {
-            "ec2:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "ec2:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -251,11 +251,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:snapshot/*",
         "Condition": {
-          "Null": {
-            "aws:RequestTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:RequestTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -268,11 +268,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:instance/*",
         "Condition": {
-          "Null": {
-            "ec2:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "ec2:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -288,13 +288,13 @@
         ],
         "Resource": "arn:aws:ec2:*:*:instance/*",
         "Condition": {
-          "StringEquals": {
-            "ec2:ResourceTag/AWSDRS": "AllowLaunchingIntoThisInstance"
-          },
           "ForAnyValue:StringEquals": {
             "aws:CalledVia": [
               "drs.amazonaws.com"
             ]
+          },
+          "StringEquals": {
+            "ec2:ResourceTag/AWSDRS": "AllowLaunchingIntoThisInstance"
           }
         }
       },
@@ -306,11 +306,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:volume/*",
         "Condition": {
-          "Null": {
-            "ec2:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "ec2:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -335,11 +335,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:instance/*",
         "Condition": {
-          "Null": {
-            "aws:RequestTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:RequestTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -375,6 +375,9 @@
           "arn:aws:ec2:*:*:network-interface/*"
         ],
         "Condition": {
+          "Bool": {
+            "aws:ViaAWSService": "true"
+          },
           "StringEquals": {
             "ec2:CreateAction": [
               "CreateSecurityGroup",
@@ -383,9 +386,6 @@
               "RunInstances",
               "CreateNetworkInterface"
             ]
-          },
-          "Bool": {
-            "aws:ViaAWSService": "true"
           }
         }
       },
@@ -453,6 +453,14 @@
           "arn:aws:ssm:*:*:document/AWSMigration-ValidateDiskSpace",
           "arn:aws:ssm:*:*:document/AWSMigration-VerifyProcessIsRunning",
           "arn:aws:ssm:*:*:document/AWSMigration-LinuxTimeSyncSetting",
+          "arn:aws:ssm:*:*:document/AWSDRS-ValidateNetworkConnectivity",
+          "arn:aws:ssm:*:*:document/AWSDRS-VerifyMountedVolumes",
+          "arn:aws:ssm:*:*:document/AWSDRS-ValidateHttpResponse",
+          "arn:aws:ssm:*:*:document/AWSDRS-ValidateDiskSpace",
+          "arn:aws:ssm:*:*:document/AWSDRS-VerifyProcessIsRunning",
+          "arn:aws:ssm:*:*:document/AWSDRS-LinuxTimeSyncSetting",
+          "arn:aws:ssm:*:*:document/AWSDRS-InstallDRAgentOnInstance",
+          "arn:aws:ssm:*:*:document/AWSDRS-VerifyTags",
           "arn:aws:ssm:*:*:document/AWSEC2-ApplicationInsightsCloudwatchAgentInstallAndConfigure",
           "arn:aws:ssm:*:*:automation-execution/*"
         ],
@@ -554,11 +562,11 @@
           "arn:aws:ec2:*:*:instance/*"
         ],
         "Condition": {
-          "Null": {
-            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -593,14 +601,14 @@
           "arn:aws:ec2:*:*:instance/*"
         ],
         "Condition": {
-          "StringEquals": {
-            "ec2:CreateAction": [
-              "CreateFleet"
-            ]
-          },
           "ForAnyValue:StringEquals": {
             "aws:CalledVia": [
               "drs.amazonaws.com"
+            ]
+          },
+          "StringEquals": {
+            "ec2:CreateAction": [
+              "CreateFleet"
             ]
           }
         }
@@ -613,11 +621,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:snapshot/*",
         "Condition": {
-          "Null": {
-            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -629,11 +637,11 @@
         ],
         "Resource": "arn:aws:ec2:*:*:network-interface/*",
         "Condition": {
-          "Null": {
-            "aws:RequestTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:RequestTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       },
@@ -656,17 +664,17 @@
         ],
         "Resource": "arn:aws:ec2:*:*:network-interface/*",
         "Condition": {
-          "Null": {
-            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
-          },
           "Bool": {
             "aws:ViaAWSService": "true"
+          },
+          "Null": {
+            "aws:ResourceTag/AWSElasticDisasterRecoveryManaged": "false"
           }
         }
       }
     ]
   },
-  "VersionId": "v9",
+  "VersionId": "v10",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:02:32+00:00"
+  "CreateDate": "2026-06-18T22:57:18+00:00"
 }

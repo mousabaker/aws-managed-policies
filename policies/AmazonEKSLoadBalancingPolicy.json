@@ -118,7 +118,6 @@
           "elasticloadbalancing:SetIpAddressType",
           "elasticloadbalancing:SetSecurityGroups",
           "elasticloadbalancing:SetSubnets",
-          "elasticloadbalancing:SetRulePriorities",
           "elasticloadbalancing:ModifyTargetGroup",
           "elasticloadbalancing:ModifyTargetGroupAttributes",
           "elasticloadbalancing:ModifyListener",
@@ -186,7 +185,8 @@
           "wafv2:GetWebACL",
           "wafv2:GetWebACLForResource",
           "elasticloadbalancing:SetWebAcl",
-          "elasticloadbalancing:DescribeTargetGroups"
+          "elasticloadbalancing:DescribeTargetGroups",
+          "elasticloadbalancing:SetRulePriorities"
         ],
         "Resource": "*"
       },
@@ -207,7 +207,8 @@
           "ec2:DescribeCoipPools",
           "ec2:GetCoipPoolUsage",
           "ec2:GetSecurityGroupsForVpc",
-          "ec2:DescribeVpcPeeringConnections"
+          "ec2:DescribeVpcPeeringConnections",
+          "ec2:DescribeIpamPools"
         ],
         "Resource": "*"
       },
@@ -225,7 +226,7 @@
       }
     ]
   },
-  "VersionId": "v8",
+  "VersionId": "v9",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-06-03T22:12:23+00:00"
+  "CreateDate": "2026-06-16T00:12:08+00:00"
 }
