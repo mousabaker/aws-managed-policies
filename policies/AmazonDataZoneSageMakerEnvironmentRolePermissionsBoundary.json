@@ -313,6 +313,7 @@
       },
       {
         "Sid": "AllowCodeBuildActions",
+        "Effect": "Allow",
         "Action": [
           "codebuild:BatchGetBuilds",
           "codebuild:StartBuild"
@@ -320,11 +321,11 @@
         "Resource": [
           "arn:aws:codebuild:*:*:project/sagemaker*",
           "arn:aws:codebuild:*:*:build/*"
-        ],
-        "Effect": "Allow"
+        ]
       },
       {
         "Sid": "AllowStepFunctionsActions",
+        "Effect": "Allow",
         "Action": [
           "states:DescribeExecution",
           "states:GetExecutionHistory",
@@ -335,8 +336,7 @@
         "Resource": [
           "arn:aws:states:*:*:statemachine:*sagemaker*",
           "arn:aws:states:*:*:execution:*sagemaker*:*"
-        ],
-        "Effect": "Allow"
+        ]
       },
       {
         "Sid": "AllowSecretManagerActions",
@@ -480,8 +480,8 @@
       },
       {
         "Sid": "AllowCreateServiceLinkedRoleForSageMakerApplicationAutoscaling",
-        "Action": "iam:CreateServiceLinkedRole",
         "Effect": "Allow",
+        "Action": "iam:CreateServiceLinkedRole",
         "Resource": "arn:aws:iam::*:role/aws-service-role/sagemaker.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_SageMakerEndpoint",
         "Condition": {
           "StringLike": {
@@ -796,22 +796,22 @@
         ],
         "Resource": "arn:aws:secretsmanager:*:*:secret:AmazonDataZone-*",
         "Condition": {
-          "StringLike": {
-            "aws:ResourceTag/AmazonDataZoneDomain": "dzd*",
-            "aws:RequestTag/AmazonDataZoneDomain": "dzd*"
-          },
-          "Null": {
-            "aws:TagKeys": "false",
-            "aws:ResourceTag/AmazonDataZoneProject": "false",
-            "aws:ResourceTag/AmazonDataZoneDomain": "false",
-            "aws:RequestTag/AmazonDataZoneDomain": "false",
-            "aws:RequestTag/AmazonDataZoneProject": "false"
-          },
           "ForAllValues:StringEquals": {
             "aws:TagKeys": [
               "AmazonDataZoneDomain",
               "AmazonDataZoneProject"
             ]
+          },
+          "Null": {
+            "aws:RequestTag/AmazonDataZoneDomain": "false",
+            "aws:RequestTag/AmazonDataZoneProject": "false",
+            "aws:ResourceTag/AmazonDataZoneDomain": "false",
+            "aws:ResourceTag/AmazonDataZoneProject": "false",
+            "aws:TagKeys": "false"
+          },
+          "StringLike": {
+            "aws:RequestTag/AmazonDataZoneDomain": "dzd*",
+            "aws:ResourceTag/AmazonDataZoneDomain": "dzd*"
           }
         }
       },
@@ -1189,13 +1189,14 @@
         "Sid": "DenyUpdateNotebookInstanceLifecycleConfig",
         "Effect": "Deny",
         "Action": [
+          "sagemaker:CreateNotebookInstanceLifecycleConfig",
           "sagemaker:UpdateNotebookInstanceLifecycleConfig"
         ],
         "Resource": "*"
       }
     ]
   },
-  "VersionId": "v11",
+  "VersionId": "v12",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-03-11T21:12:10+00:00"
+  "CreateDate": "2026-06-27T00:57:10+00:00"
 }

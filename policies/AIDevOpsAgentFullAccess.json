@@ -76,6 +76,7 @@
           "aidevops:TagResource",
           "aidevops:UntagResource",
           "aidevops:UpdateAgentSpace",
+          "aidevops:UpdateApprovalAction",
           "aidevops:UpdateAsset",
           "aidevops:UpdateAssetFile",
           "aidevops:UpdateAssociation",
@@ -92,7 +93,7 @@
       }
     ]
   },
-  "VersionId": "v5",
+  "VersionId": "v6",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-06-12T23:27:07+00:00"
+  "CreateDate": "2026-06-26T23:57:19+00:00"
 }
