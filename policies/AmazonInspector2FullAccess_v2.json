@@ -26,7 +26,8 @@
           "StringEquals": {
             "iam:AWSServiceName": [
               "agentless.inspector2.amazonaws.com",
-              "inspector2.amazonaws.com"
+              "inspector2.amazonaws.com",
+              "thirdparty.inspector2.amazonaws.com"
             ]
           }
         }
@@ -44,7 +45,8 @@
           "StringEquals": {
             "organizations:ServicePrincipal": [
               "inspector2.amazonaws.com",
-              "agentless.inspector2.amazonaws.com"
+              "agentless.inspector2.amazonaws.com",
+              "thirdparty.inspector2.amazonaws.com"
             ]
           }
         }
@@ -105,10 +107,36 @@
             ]
           }
         }
+      },
+      {
+        "Sid": "AllowConfigConnectorWriteAndList",
+        "Effect": "Allow",
+        "Action": [
+          "config:PutConnector",
+          "config:ListConnectors"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Sid": "AllowConfigConnectorRead",
+        "Effect": "Allow",
+        "Action": "config:GetConnector",
+        "Resource": "arn:aws:config:*:*:connector/*"
+      },
+      {
+        "Sid": "AllowCreateConfigThirdPartySLR",
+        "Effect": "Allow",
+        "Action": "iam:CreateServiceLinkedRole",
+        "Resource": "arn:aws:iam::*:role/aws-service-role/thirdparty.config.amazonaws.com/AWSServiceRoleForConfigThirdParty",
+        "Condition": {
+          "StringEquals": {
+            "iam:AWSServiceName": "thirdparty.config.amazonaws.com"
+          }
+        }
       }
     ]
   },
-  "VersionId": "v6",
+  "VersionId": "v9",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:03:17+00:00"
+  "CreateDate": "2026-07-08T19:12:18+00:00"
 }

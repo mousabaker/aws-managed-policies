@@ -7,7 +7,8 @@
         "Effect": "Allow",
         "Action": [
           "ds:DescribeDirectories",
-          "ds:GetAuthorizedApplicationDetails"
+          "ds:GetAuthorizedApplicationDetails",
+          "ds:DescribeTrusts"
         ],
         "Resource": "*"
       },
@@ -116,6 +117,14 @@
         "Resource": "*"
       },
       {
+        "Sid": "DescribeVpcEndpoints",
+        "Effect": "Allow",
+        "Action": [
+          "ec2:DescribeVpcEndpoints"
+        ],
+        "Resource": "*"
+      },
+      {
         "Sid": "ReadSecretPermissions",
         "Effect": "Allow",
         "Action": [
@@ -125,7 +134,7 @@
       }
     ]
   },
-  "VersionId": "v5",
+  "VersionId": "v6",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-04-20T22:57:09+00:00"
+  "CreateDate": "2026-07-10T20:42:22+00:00"
 }
