@@ -33,6 +33,7 @@
           "codewhisperer:*",
           "sagemaker-unified-studio-mcp:*",
           "elasticmapreduce:*",
+          "emr-containers:*",
           "q:*",
           "sagemaker:*",
           "sagemaker-mlflow:*",
@@ -57,6 +58,7 @@
           "athena:TerminateSession",
           "emr-serverless:*Session*",
           "emr-serverless:*Dashboard*",
+          "emr-containers:*ManagedEndpoint*",
           "elasticmapreduce:*Session*",
           "glue:CancelStatement",
           "glue:CreateSession",
@@ -71,6 +73,7 @@
         "Resource": [
           "arn:aws:athena:*:*:workgroup/*/session/*",
           "arn:aws:emr-serverless:*:*:/applications/*/sessions/*",
+          "arn:aws:emr-containers:*:*:/virtualclusters/*/endpoints/*",
           "arn:aws:elasticmapreduce:*:*:cluster/*/session/*",
           "arn:aws:glue:*:*:session/*"
         ],
@@ -88,6 +91,7 @@
           "athena:TagResource",
           "athena:UntagResource",
           "emr-serverless:*Resource",
+          "emr-containers:*Resource",
           "elasticmapreduce:AddTags",
           "elasticmapreduce:RemoveTags",
           "glue:TagResource",
@@ -96,6 +100,7 @@
         "Resource": [
           "arn:aws:athena:*:*:workgroup/*/session/*",
           "arn:aws:emr-serverless:*:*:/applications/*/sessions/*",
+          "arn:aws:emr-containers:*:*:/virtualclusters/*/endpoints/*",
           "arn:aws:elasticmapreduce:*:*:cluster/*/session/*",
           "arn:aws:glue:*:*:session/*"
         ],
@@ -239,7 +244,8 @@
               "scheduler.amazonaws.com",
               "emr-serverless.amazonaws.com",
               "elasticmapreduce.amazonaws.com",
-              "airflow-serverless.amazonaws.com"
+              "airflow-serverless.amazonaws.com",
+              "pods.eks.amazonaws.com"
             ]
           }
         }
@@ -623,7 +629,7 @@
       }
     ]
   },
-  "VersionId": "v22",
+  "VersionId": "v23",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-06-29T16:12:34+00:00"
+  "CreateDate": "2026-07-14T18:57:14+00:00"
 }
