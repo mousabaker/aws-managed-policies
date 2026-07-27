@@ -98,9 +98,11 @@
           "invoicing:ListInvoiceCorrections",
           "invoicing:StartInvoiceCorrection",
           "invoicing:PutInvoiceEmailDeliveryPreferences",
+          "invoicing:SendProcurementPortalValidation",
           "invoicing:TagResource",
           "invoicing:UntagResource",
           "invoicing:UpdateInvoiceUnit",
+          "invoicing:VerifyProcurementPortalValidation",
           "mapcredits:ListQuarterSpend",
           "mapcredits:ListAssociatedPrograms",
           "mapcredits:ListQuarterCredits",
@@ -160,7 +162,7 @@
       }
     ]
   },
-  "VersionId": "v28",
+  "VersionId": "v29",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-04-08T17:12:18+00:00"
+  "CreateDate": "2026-07-21T19:57:23+00:00"
 }

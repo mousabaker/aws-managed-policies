@@ -21,6 +21,7 @@
         "Action": [
           "pi:CreatePerformanceAnalysisReport",
           "pi:GetPerformanceAnalysisReport",
+          "pi:ListPerformanceAnalysisReportRecommendations",
           "pi:ListPerformanceAnalysisReports",
           "pi:DeletePerformanceAnalysisReport"
         ],
@@ -63,7 +64,7 @@
       }
     ]
   },
-  "VersionId": "v5",
+  "VersionId": "v6",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:02:39+00:00"
+  "CreateDate": "2026-07-23T00:27:08+00:00"
 }
