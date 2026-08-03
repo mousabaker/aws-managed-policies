@@ -4,11 +4,11 @@
     "Statement": [
       {
         "Sid": "ReadPermissions",
-        "Effect": "Allow",
         "Action": [
           "ec2:DescribeDhcpOptions",
           "ec2:DescribeImages",
           "ec2:DescribeInstances",
+          "ec2:DescribeInstanceTypes",
           "ec2:DescribeInternetGateways",
           "ec2:DescribeNetworkInterfaces",
           "ec2:DescribeNetworkInterfaceAttribute",
@@ -17,16 +17,17 @@
           "ec2:DescribeSubnets",
           "ec2:DescribeVpcs"
         ],
+        "Effect": "Allow",
         "Resource": [
           "*"
         ]
       },
       {
         "Sid": "CreateServiceLinkedRole",
-        "Effect": "Allow",
         "Action": [
           "iam:CreateServiceLinkedRole"
         ],
+        "Effect": "Allow",
         "Resource": [
           "arn:*:iam::*:role/aws-service-role/elasticloadbalancing.amazonaws.com/AWSServiceRoleForElasticLoadBalancing"
         ],
@@ -38,10 +39,10 @@
       },
       {
         "Sid": "PassWorkerRole",
-        "Effect": "Allow",
         "Action": [
           "iam:PassRole"
         ],
+        "Effect": "Allow",
         "Resource": [
           "arn:*:iam::*:role/*-ROSA-Worker-Role"
         ],
@@ -223,6 +224,22 @@
         }
       },
       {
+        "Sid": "NodePoolSQSActions",
+        "Effect": "Allow",
+        "Action": [
+          "sqs:DeleteMessage",
+          "sqs:ReceiveMessage"
+        ],
+        "Resource": [
+          "arn:aws:sqs:*:*:*"
+        ],
+        "Condition": {
+          "StringEquals": {
+            "aws:ResourceTag/red-hat": "true"
+          }
+        }
+      },
+      {
         "Sid": "ManagedKMSRestrictedResourceTag",
         "Effect": "Allow",
         "Action": [
@@ -257,7 +274,7 @@
       }
     ]
   },
-  "VersionId": "v8",
+  "VersionId": "v9",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:59:26+00:00"
+  "CreateDate": "2026-07-29T16:57:30+00:00"
 }

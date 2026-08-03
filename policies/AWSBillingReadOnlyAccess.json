@@ -55,6 +55,8 @@
           "invoicing:ListProcurementPortalPreferences",
           "invoicing:ListTagsForResource",
           "invoicing:ListInvoiceCorrections",
+          "invoicing:ListProcurementPortals",
+          "invoicing:ListProcurementPortalSuppliers",
           "mapcredits:ListQuarterSpend",
           "mapcredits:ListAssociatedPrograms",
           "mapcredits:ListQuarterCredits",
@@ -86,7 +88,7 @@
       }
     ]
   },
-  "VersionId": "v27",
+  "VersionId": "v28",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-04-08T17:12:09+00:00"
+  "CreateDate": "2026-07-30T22:12:29+00:00"
 }

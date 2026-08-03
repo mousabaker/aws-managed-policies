@@ -153,6 +153,23 @@
         }
       },
       {
+        "Sid": "CFNTagOnCreate",
+        "Effect": "Allow",
+        "Action": [
+          "cloudformation:TagResource",
+          "cloudformation:UntagResource"
+        ],
+        "Resource": "arn:aws:cloudformation:*:*:stack/Nmd*",
+        "Condition": {
+          "StringEquals": {
+            "cloudformation:CreateAction": [
+              "CreateStack",
+              "UpdateStack"
+            ]
+          }
+        }
+      },
+      {
         "Sid": "CFNOperations",
         "Effect": "Allow",
         "Action": [
@@ -656,10 +673,8 @@
         "Effect": "Allow",
         "Action": [
           "ssm:DeleteParameter",
-          "ssm:PutResourcePolicy",
           "ssm:DeleteResourcePolicy",
-          "ssm:ListTagsForResource",
-          "ssm:GetResourcePolicies"
+          "ssm:ListTagsForResource"
         ],
         "Resource": [
           "arn:aws:ssm:*:*:parameter/network-migration/*"
@@ -676,7 +691,25 @@
         }
       },
       {
-        "Sid": "ramTAgReource",
+        "Sid": "ramResourceSharing",
+        "Effect": "Allow",
+        "Action": [
+          "ssm:PutResourcePolicy",
+          "ssm:GetResourcePolicies"
+        ],
+        "Resource": [
+          "arn:aws:ssm:*:*:parameter/network-migration/*"
+        ],
+        "Condition": {
+          "ForAnyValue:StringEquals": {
+            "aws:CalledVia": [
+              "cloudformation.amazonaws.com"
+            ]
+          }
+        }
+      },
+      {
+        "Sid": "ramTagResource",
         "Effect": "Allow",
         "Action": [
           "ram:TagResource"
@@ -1060,7 +1093,7 @@
       }
     ]
   },
-  "VersionId": "v5",
+  "VersionId": "v6",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-06-29T08:57:29+00:00"
+  "CreateDate": "2026-07-30T07:42:10+00:00"
 }

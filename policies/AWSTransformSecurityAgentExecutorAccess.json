@@ -29,8 +29,8 @@
           "s3:ListBucket"
         ],
         "Resource": [
-          "arn:aws:s3:::kct-security-agent-*",
-          "arn:aws:s3:::kct-security-agent-*/*"
+          "arn:aws:s3:::atx-security-agent-*",
+          "arn:aws:s3:::atx-security-agent-*/*"
         ],
         "Condition": {
           "StringEquals": {
@@ -42,7 +42,7 @@
         "Sid": "S3SecurityAgentUpload",
         "Effect": "Allow",
         "Action": "s3:PutObject",
-        "Resource": "arn:aws:s3:::kct-security-agent-*/security-scans/*",
+        "Resource": "arn:aws:s3:::atx-security-agent-*/security-scans/*",
         "Condition": {
           "StringEquals": {
             "s3:ResourceAccount": "${aws:PrincipalAccount}"
@@ -60,10 +60,32 @@
             "aws:ResourceAccount": "${aws:PrincipalAccount}"
           }
         }
+      },
+      {
+        "Sid": "CFNDiscoverSecurityAgentStack",
+        "Effect": "Allow",
+        "Action": "cloudformation:ListStacks",
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "aws:ResourceAccount": "${aws:PrincipalAccount}"
+          }
+        }
+      },
+      {
+        "Sid": "CFNDescribeSecurityAgentStack",
+        "Effect": "Allow",
+        "Action": "cloudformation:DescribeStacks",
+        "Resource": "arn:aws:cloudformation:*:*:stack/AtxSecurityAgentStack-*/*",
+        "Condition": {
+          "StringEquals": {
+            "aws:ResourceAccount": "${aws:PrincipalAccount}"
+          }
+        }
       }
     ]
   },
-  "VersionId": "v1",
+  "VersionId": "v2",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-06-30T21:27:39+00:00"
+  "CreateDate": "2026-07-28T15:42:11+00:00"
 }
