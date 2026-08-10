@@ -8,8 +8,7 @@
         "Action": [
           "organizations:AttachPolicy",
           "organizations:DescribePolicy",
-          "organizations:DetachPolicy",
-          "organizations:ListPolicies"
+          "organizations:DetachPolicy"
         ],
         "Resource": "arn:aws:organizations::*:policy/*/service_control_policy/*",
         "Condition": {
@@ -17,6 +16,12 @@
             "aws:ResourceTag/ManagedBy": "SpendLimit"
           }
         }
+      },
+      {
+        "Sid": "SCPListPolicyAction",
+        "Effect": "Allow",
+        "Action": "organizations:ListPolicies",
+        "Resource": "*"
       },
       {
         "Sid": "SCPTargetActions",
@@ -35,7 +40,7 @@
       }
     ]
   },
-  "VersionId": "v1",
+  "VersionId": "v2",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-07-17T21:12:21+00:00"
+  "CreateDate": "2026-08-07T21:07:17+00:00"
 }
