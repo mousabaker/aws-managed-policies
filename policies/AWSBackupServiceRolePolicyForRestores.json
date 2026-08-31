@@ -401,7 +401,8 @@
         "Action": [
           "cloudformation:CreateChangeSet",
           "cloudformation:DescribeChangeSet",
-          "cloudformation:TagResource"
+          "cloudformation:TagResource",
+          "cloudformation:UntagResource"
         ],
         "Resource": "arn:aws:cloudformation:*:*:*/*/*"
       },
@@ -533,8 +534,8 @@
         "Resource": "arn:aws:eks:*:*:access-entry/*",
         "Condition": {
           "StringEquals": {
-            "eks:policyArn": "arn:aws:eks::aws:cluster-access-policy/AWSBackupFullAccessPolicyForRestore",
-            "eks:accessScope": "cluster"
+            "eks:accessScope": "cluster",
+            "eks:policyArn": "arn:aws:eks::aws:cluster-access-policy/AWSBackupFullAccessPolicyForRestore"
           }
         }
       },
@@ -600,7 +601,7 @@
       }
     ]
   },
-  "VersionId": "v35",
+  "VersionId": "v36",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:57:30+00:00"
+  "CreateDate": "2026-08-27T23:57:07+00:00"
 }
