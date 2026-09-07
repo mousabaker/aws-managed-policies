@@ -8,21 +8,32 @@
         "Action": [
           "odb:GetOciOnboardingStatus",
           "odb:InitializeService",
-          "odb:GetCloudExadataInfrastructure",
-          "odb:GetCloudExadataInfrastructureUnallocatedResources",
-          "odb:ListCloudExadataInfrastructures",
-          "odb:CreateCloudAutonomousVmCluster",
-          "odb:GetCloudAutonomousVmCluster",
-          "odb:DeleteCloudAutonomousVmCluster",
-          "odb:ListCloudAutonomousVmClusters",
+          "odb:GetExascaleDbStorageVault",
+          "odb:ListExascaleDbStorageVaults",
+          "odb:CreateExadbVmCluster",
+          "odb:GetExadbVmCluster",
+          "odb:UpdateExadbVmCluster",
+          "odb:DeleteExadbVmCluster",
+          "odb:ListExadbVmClusters",
+          "odb:AssociateVirtualMachinesToExadbVmCluster",
+          "odb:DisassociateVirtualMachinesFromExadbVmCluster",
           "odb:AssociateIamRoleToResource",
           "odb:DisassociateIamRoleFromResource",
+          "odb:CreateDbNode",
+          "odb:GetDbNode",
+          "odb:RebootDbNode",
+          "odb:StartDbNode",
+          "odb:StopDbNode",
+          "odb:DeleteDbNode",
+          "odb:ListDbNodes",
+          "odb:GetDbServer",
           "odb:ListDbServers",
           "odb:GetOdbNetwork",
           "odb:ListOdbNetworks",
-          "odb:ListAutonomousVirtualMachines",
           "odb:ListDbSystemShapes",
+          "odb:ListFlexComponents",
           "odb:ListGiVersions",
+          "odb:ListGiMinorVersions",
           "odb:ListSystemVersions",
           "odb:ListTagsForResource"
         ],
@@ -44,7 +55,8 @@
           "odb:UntagResource"
         ],
         "Resource": [
-          "arn:aws:odb:*:*:cloud-autonomous-vm-cluster/*"
+          "arn:aws:odb:*:*:exadb-vm-cluster/*",
+          "arn:aws:odb:*:*:db-node/*"
         ]
       },
       {
@@ -55,12 +67,12 @@
           "odb:UpdateOutboundIntegration"
         ],
         "Resource": [
-          "arn:aws:odb:*:*:cloud-autonomous-vm-cluster/*"
+          "arn:aws:odb:*:*:exadb-vm-cluster/*"
         ]
       }
     ]
   },
-  "VersionId": "v2",
+  "VersionId": "v1",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-09-04T21:17:07+00:00"
+  "CreateDate": "2026-09-04T21:37:07+00:00"
 }

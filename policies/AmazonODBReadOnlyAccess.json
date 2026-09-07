@@ -14,6 +14,11 @@
           "odb:ListCloudVmClusters",
           "odb:GetCloudAutonomousVmCluster",
           "odb:ListCloudAutonomousVmClusters",
+          "odb:GetExascaleDbStorageVault",
+          "odb:ListExascaleDbStorageVaults",
+          "odb:GetExadbVmCluster",
+          "odb:ListExadbVmClusters",
+          "odb:ListGiMinorVersions",
           "odb:GetAutonomousDatabase",
           "odb:ListAutonomousDatabases",
           "odb:ListAutonomousDatabaseClones",
@@ -30,6 +35,7 @@
           "odb:ListOdbPeeringConnections",
           "odb:ListAutonomousVirtualMachines",
           "odb:ListDbSystemShapes",
+          "odb:ListFlexComponents",
           "odb:ListGiVersions",
           "odb:ListSystemVersions",
           "odb:ListAutonomousDatabaseVersions",
@@ -50,7 +56,7 @@
       }
     ]
   },
-  "VersionId": "v1",
+  "VersionId": "v2",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-08-07T01:12:14+00:00"
+  "CreateDate": "2026-09-04T21:27:07+00:00"
 }

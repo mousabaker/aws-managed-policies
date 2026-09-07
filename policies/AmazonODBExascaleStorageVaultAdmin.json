@@ -8,14 +8,12 @@
         "Action": [
           "odb:GetOciOnboardingStatus",
           "odb:InitializeService",
-          "odb:CreateCloudExadataInfrastructure",
-          "odb:GetCloudExadataInfrastructure",
-          "odb:UpdateCloudExadataInfrastructure",
-          "odb:GetCloudExadataInfrastructureUnallocatedResources",
-          "odb:DeleteCloudExadataInfrastructure",
-          "odb:ListCloudExadataInfrastructures",
-          "odb:ListCloudVmClusters",
-          "odb:ListCloudAutonomousVmClusters",
+          "odb:CreateExascaleDbStorageVault",
+          "odb:GetExascaleDbStorageVault",
+          "odb:UpdateExascaleDbStorageVault",
+          "odb:DeleteExascaleDbStorageVault",
+          "odb:ListExascaleDbStorageVaults",
+          "odb:ListExadbVmClusters",
           "odb:GetDbServer",
           "odb:ListDbServers",
           "odb:ListDbSystemShapes",
@@ -58,12 +56,12 @@
           "odb:UntagResource"
         ],
         "Resource": [
-          "arn:aws:odb:*:*:cloud-exadata-infrastructure/*"
+          "arn:aws:odb:*:*:exascale-db-storage-vault/*"
         ]
       }
     ]
   },
-  "VersionId": "v2",
+  "VersionId": "v1",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-09-04T21:27:07+00:00"
+  "CreateDate": "2026-09-04T21:37:07+00:00"
 }
