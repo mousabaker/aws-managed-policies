@@ -1068,7 +1068,9 @@
           "cloudtrail:GetInsightSelectors",
           "cloudtrail:GetTrail",
           "cloudtrail:GetTrailStatus",
+          "connect:DescribeHoursOfOperation",
           "connect:DescribeQueue",
+          "connect:ListHoursOfOperationOverrides",
           "connect:ListInstances",
           "connect:ListQuickConnects",
           "connect:ListUserProficiencies",
@@ -1445,7 +1447,7 @@
       }
     ]
   },
-  "VersionId": "v53",
+  "VersionId": "v54",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-09-03T19:37:08+00:00"
+  "CreateDate": "2026-09-09T23:27:08+00:00"
 }
