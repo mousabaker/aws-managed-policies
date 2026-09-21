@@ -667,7 +667,8 @@
         "Effect": "Allow",
         "Action": [
           "sagemaker:CreateUserProfile",
-          "sagemaker:DeleteUserProfile"
+          "sagemaker:DeleteUserProfile",
+          "sagemaker:UpdateUserProfile"
         ],
         "Resource": "arn:aws:sagemaker:*:*:user-profile/*/${aws:PrincipalTag/datazone:userId}",
         "Condition": {
@@ -681,7 +682,8 @@
         "Effect": "Allow",
         "Action": [
           "sagemaker:CreateUserProfile",
-          "sagemaker:DeleteUserProfile"
+          "sagemaker:DeleteUserProfile",
+          "sagemaker:UpdateUserProfile"
         ],
         "Resource": "arn:aws:sagemaker:*:*:user-profile/*",
         "Condition": {
@@ -1292,7 +1294,7 @@
       }
     ]
   },
-  "VersionId": "v43",
+  "VersionId": "v44",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-09-04T18:57:08+00:00"
+  "CreateDate": "2026-09-14T20:37:08+00:00"
 }
