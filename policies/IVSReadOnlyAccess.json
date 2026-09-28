@@ -7,6 +7,7 @@
         "Effect": "Allow",
         "Action": [
           "ivs:BatchGetChannel",
+          "ivs:GetAdConfiguration",
           "ivs:GetChannel",
           "ivs:GetComposition",
           "ivs:GetEncoderConfiguration",
@@ -21,6 +22,7 @@
           "ivs:GetStorageConfiguration",
           "ivs:GetStream",
           "ivs:GetStreamSession",
+          "ivs:ListAdConfigurations",
           "ivs:ListChannels",
           "ivs:ListCompositions",
           "ivs:ListEncoderConfigurations",
@@ -44,7 +46,7 @@
       }
     ]
   },
-  "VersionId": "v6",
+  "VersionId": "v7",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T18:03:11+00:00"
+  "CreateDate": "2026-09-25T19:47:08+00:00"
 }
