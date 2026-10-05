@@ -30,7 +30,8 @@
           "organizations:DescribeOrganizationalUnit",
           "organizations:DescribeAccount",
           "organizations:DescribeOrganization",
-          "organizations:ListAccounts"
+          "organizations:ListAccounts",
+          "organizations:ListRoots"
         ],
         "Resource": "*"
       },
@@ -78,7 +79,7 @@
       }
     ]
   },
-  "VersionId": "v6",
+  "VersionId": "v7",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-02-12T17:59:55+00:00"
+  "CreateDate": "2026-09-28T21:37:07+00:00"
 }

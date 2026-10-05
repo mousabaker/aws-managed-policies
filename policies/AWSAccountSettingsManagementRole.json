@@ -8,7 +8,9 @@
           "account:GetContactInformation",
           "account:PutContactInformation",
           "account:GetAccountInformation",
-          "account:CloseAccount"
+          "account:CloseAccount",
+          "account:SendPhoneNumberVerification",
+          "account:VerifyPhoneNumber"
         ],
         "Resource": "*"
       },
@@ -24,7 +26,9 @@
           "payments:MakePayment",
           "payments:UpdatePaymentPreferences",
           "payments:CreatePaymentInstrument",
-          "payments:UpdatePaymentInstrument"
+          "payments:UpdatePaymentInstrument",
+          "payments:DeletePaymentInstrument",
+          "payments:ListPaymentInstruments"
         ],
         "Resource": "*"
       },
@@ -113,7 +117,7 @@
       }
     ]
   },
-  "VersionId": "v9",
+  "VersionId": "v11",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-09-01T15:17:07+00:00"
+  "CreateDate": "2026-09-30T19:27:08+00:00"
 }

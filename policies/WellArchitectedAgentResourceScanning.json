@@ -399,6 +399,7 @@
           "resource-explorer-2:List*",
           "resource-groups:Get*",
           "resource-groups:List*",
+          "resource-groups:SearchResources",
           "robomaker:Describe*",
           "robomaker:List*",
           "rolesanywhere:Get*",
@@ -549,6 +550,7 @@
           "cloudformation:GetStackPolicy",
           "cloudformation:GetTemplate",
           "cloudformation:ListStackInstances",
+          "cloudformation:ListStackResources",
           "cloudformation:ListStacks",
           "cloudformation:ListStackSets",
           "cloudformation:ListTypes",
@@ -1137,7 +1139,7 @@
       }
     ]
   },
-  "VersionId": "v1",
+  "VersionId": "v2",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-07-16T20:27:15+00:00"
+  "CreateDate": "2026-09-30T18:37:07+00:00"
 }
