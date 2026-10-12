@@ -201,7 +201,7 @@
         ],
         "Condition": {
           "StringEquals": {
-            "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            "aws:ResourceOrgID": "${aws:PrincipalOrgID}"
           }
         }
       },
@@ -237,7 +237,7 @@
         ],
         "Condition": {
           "StringEquals": {
-            "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            "aws:ResourceOrgID": "${aws:PrincipalOrgID}"
           }
         }
       },
@@ -274,7 +274,7 @@
         ],
         "Condition": {
           "StringEquals": {
-            "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            "aws:ResourceOrgID": "${aws:PrincipalOrgID}"
           }
         }
       },
@@ -335,7 +335,7 @@
       }
     ]
   },
-  "VersionId": "v2",
+  "VersionId": "v3",
   "IsDefaultVersion": true,
-  "CreateDate": "2026-09-01T10:27:08+00:00"
+  "CreateDate": "2026-10-06T07:37:08+00:00"
 }
